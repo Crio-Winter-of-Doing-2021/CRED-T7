@@ -10,5 +10,5 @@ class Cards(models.Model):
     cvv = models.CharField(max_length=3)
     expiry_date_month = models.CharField(max_length=2)
     expiry_date_year = models.CharField(max_length=4)
-    owner = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="cards")
+    # owner = models.ForeignKey(
+    #     User, on_delete=models.CASCADE, related_name="cards")
