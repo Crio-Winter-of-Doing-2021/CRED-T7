@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-# Create your models here.
-
+from django.core.exceptions import ValidationError 
 
 class Cards(models.Model):
     bank = models.CharField(max_length=200)
