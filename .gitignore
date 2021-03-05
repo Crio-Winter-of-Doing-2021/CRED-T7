@@ -1,1 +1,38 @@
-env/
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+
+# Python # 
+*.py[cod] 
+*$py.class 
+
+# Installer logs 
+pip-log.txt 
+pip-delete-this-directory.txt 
+
+# pyenv 
+.python-version 
+
+# celery 
+celerybeat-schedule.* 
+
+# SageMath parsed files 
+*.sage.py 
+
+# Environments 
+.env 
+env/ 
+env.bak/ 
+
+# Sublime Text # 
+*.tmlanguage.cache 
+*.tmPreferences.cache 
+*.stTheme.cache 
+*.sublime-workspace 
+*.sublime-project 
+
+# Package control specific files Package 
+GitHub.sublime-settings 

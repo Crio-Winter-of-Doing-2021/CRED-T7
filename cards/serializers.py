@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Cards
+from .models import Cards, Transactions
 import time
 yearn, monthn, dayn, hourn, minn = map(int, time.strftime("%Y %m %d %H %M").split())
 
@@ -91,3 +91,9 @@ class CardSerializer(serializers.ModelSerializer):
         except ValueError:
             raise serializers.ValidationError(
                 "Incorrect value entered. Try again.")
+
+
+class TransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transactions
+        fields = '__all__'
