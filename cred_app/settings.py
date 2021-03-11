@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'cards',
     'accounts',
     'knox',
+    'frontend',
 ]
 
 REST_FRAMEWORK = {'DEFAULT_AUTHENTICATION_CLASSES': (
