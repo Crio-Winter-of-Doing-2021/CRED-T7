@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-
-export class register extends Component {
+import { Link } from 'react-router-dom'
+export class Register extends Component {
     state = {
         username: '',
         email: '',
@@ -8,7 +8,20 @@ export class register extends Component {
         password2: '',
     }
 
+    onChange = e => {
+        this.setState({
+            [e.target.name]: [e.target.value]
+        });
+    };
+
+    onSubmit = e => {
+        e.preventDefault();
+        console.log('submit');
+    };
+
     render() {
+        const { username, email, password1, password2 } = this.state
+
         return (
             <div className="col-md-10 m-auto">
                 <div className="card card-body mt-5">
@@ -33,7 +46,7 @@ export class register extends Component {
                             </div>
                         </div>
                         <button type="submit" className="btn btn-primary">Register</button>
-                        <p>
+                        <p className="mt-4">
                             Already have an account? <Link to="/login">Login</Link>
                         </p>
                     </form>
@@ -43,4 +56,4 @@ export class register extends Component {
     }
 }
 
-export default register
+export default Register
