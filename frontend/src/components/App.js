@@ -7,6 +7,8 @@ import Favicon from 'react-favicon';
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './accounts/login';
 import Register from './accounts/register';
+import Form from './cards/Form';
+import Cards from './cards/Cards';
 import { Provider } from 'react-redux';
 import store from '../store';
 
@@ -21,8 +23,9 @@ class App extends Component {
                             <Route exact path="/" component={Dashboard} />
                             <Route exact path="/register" component={Register} />
                             <Route exact path="/login" component={Login} />
+                            <Route exact path="/addcard" component={Form} />
+                            <Route exact path="/cards" component={Cards} />
                         </Switch>
-                        <Footer />
                     </Fragment>
                 </Router>
 
