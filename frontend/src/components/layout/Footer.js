@@ -4,14 +4,11 @@ export class Footer extends Component {
     render() {
         return (
 
-            <div className="d-flex flex-column min-vh-100">
+            <div className="d-flex flex-column align-items-end">
                 <div className="wrapper flex-grow-1"></div>
-                <footer>
-                    <nav className="navbar navbar-dark bg-dark">
-                        <a className="navbar-brand" href="#">
-                            CRED
-                        </a>
-                    </nav>
+                <footer class="container">
+                    <p class="float-right"><a href="#">Back to top</a></p>
+                    <p>© 2017-2018 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
                 </footer>
             </div>
         )

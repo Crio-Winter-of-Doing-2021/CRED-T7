@@ -11,8 +11,13 @@ import Form from './cards/Form';
 import Cards from './cards/Cards';
 import { Provider } from 'react-redux';
 import store from '../store';
+import PrivateRoute from './common/PrivateRoute';
+import { loadUser } from '../actions/auth';
 
 class App extends Component {
+    componentDidMount() {
+        store.dispatch(loadUser());
+    }
     render() {
         return (
             <Provider store={store}>
@@ -20,12 +25,13 @@ class App extends Component {
                     <Fragment>
                         <Header />
                         <Switch>
-                            <Route exact path="/" component={Dashboard} />
+                            <PrivateRoute exact path="/" component={Dashboard} />
                             <Route exact path="/register" component={Register} />
                             <Route exact path="/login" component={Login} />
-                            <Route exact path="/addcard" component={Form} />
-                            <Route exact path="/cards" component={Cards} />
+                            <PrivateRoute exact path="/addcard" component={Form} />
+                            <PrivateRoute exact path="/cards" component={Cards} />
                         </Switch>
+                        {/* <Footer /> */}
                     </Fragment>
                 </Router>
 

@@ -35,7 +35,7 @@ export class Login extends Component {
                                 <input type="password" name="password" value={password} onChange={this.onChange} className="form-control" id="formGroupExampleInput4" placeholder="Type Password again" />
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-primary">Register</button>
+                        <button type="submit" className="btn btn-primary">Login</button>
                         <p className="mt-4">
                             Don't have an account? <Link to="/register">Register</Link>
                         </p>

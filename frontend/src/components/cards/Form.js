@@ -30,19 +30,20 @@ export class Form extends Component {
     };
 
     render() {
+        const { card_number, owner_name, bank, cvv, expiry } = this.state
         return (
             <form onSubmit={this.onSubmit} className="card card-body p-4 m-5 container" >
                 <h2>Add Card</h2>
                 <div className="row py-3">
                     <div className="form-group col-md-6">
                         <label htmlFor="formGroupExampleInput">Credit Card Number</label>
-                        <input type="text" onChange={this.onChange}
+                        <input value={card_number} type="text" onChange={this.onChange}
                             name="card_number" maxLength="16"
                             className="form-control" id="formGroupExampleInput4" placeholder="Enter Credit Card No." />
                     </div>
                     <div className="form-group col-md-6">
                         <label htmlFor="formGroupExampleInput">Name on the card</label>
-                        <input type="text" onChange={this.onChange}
+                        <input type="text" value={owner_name} onChange={this.onChange}
                             name="owner_name" className="form-control" id="formGroupExampleInput" placeholder="Enter Name" />
                     </div>
                     <div className="form-group col-md-6">
