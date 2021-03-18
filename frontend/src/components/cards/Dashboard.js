@@ -13,8 +13,10 @@ export class Dashboard extends Component {
                             <div class="card-body">
                                 <h5 class="card-title">Add a Card</h5>
                                 <p class="card-text">Want to add a Card? Click Below</p>
-                                <button class="btn btn-primary">
-                                    <Link to="/addcard"><p className="card-text text-light">Add Card</p></Link></button>
+
+                                <Link to="/addcard">
+                                    <button class="btn btn-primary">
+                                        <p className="card-text text-light">Add Card</p></button></Link>
                             </div>
                         </div>
                     </div>
@@ -23,8 +25,10 @@ export class Dashboard extends Component {
                             <div class="card-body">
                                 <h5 class="card-title">View Your Cards</h5>
                                 <p class="card-text">Want to view your cards and manage their statements? Click Below</p>
-                                <button href="" class="btn btn-primary">
-                                    <Link to="/cards"><p className="card-text text-light">View Cards</p></Link></button>
+
+                                <Link to="/cards"> <button href="" class="btn btn-primary">
+                                    <p className="card-text text-light">View Cards</p>
+                                </button></Link>
                             </div>
                         </div>
                     </div>
