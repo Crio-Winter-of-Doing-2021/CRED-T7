@@ -7,7 +7,8 @@ from django.core.validators import MinValueValidator
 
 class Cards(models.Model):
     bank = models.CharField(max_length=200)
-    card_number = models.CharField(max_length=16, unique=True)
+    card_number = models.CharField(max_length=16, unique=True, error_messages={
+                                   'unique': "This card has already been added. Try another."})
     owner_name = models.CharField(max_length=200)
     cvv = models.CharField(max_length=3)
     expiry_date_month = models.CharField(max_length=2)
