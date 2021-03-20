@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types'
+import { login } from '../../actions/auth';
+
 
 export class Login extends Component {
     state = {
         username: '',
         password: '',
+    }
+
+    static propTypes = {
+        login: PropTypes.func.isRequired,
+        isAuthenticated: PropTypes.bool
     }
 
     onChange = e => {
@@ -15,11 +24,15 @@ export class Login extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        console.log('submit');
+        // console.log(this.state.username[0], this.state.password[0])
+        this.props.login(this.state.username, this.state.password)
     };
 
     render() {
         const { username, password } = this.state
+        if (this.props.isAuthenticated) {
+            return <Redirect to="/" />
+        }
         return (
             <div className="col-md-10 m-auto">
                 <div className="card card-body mt-5">
@@ -27,12 +40,12 @@ export class Login extends Component {
                         <h2 className="text-center">Login</h2>
                         <div className="row">
                             <div className="form-group col-md-6">
-                                <label htmlFor="formGroupExampleInput">Name</label>
-                                <input type="text" name="username" value={username} onChange={this.onChange} className="form-control" id="formGroupExampleInput1" placeholder="Enter the Name" />
+                                <label htmlFor="formGroupExampleInput">Username</label>
+                                <input type="text" name="username" value={username} onChange={this.onChange} className="form-control" id="formGroupExampleInput1" placeholder="Enter usename" />
                             </div>
                             <div className="form-group col-md-6">
-                                <label htmlFor="formGroupExampleInput">Confirm Password</label>
-                                <input type="password" name="password" value={password} onChange={this.onChange} className="form-control" id="formGroupExampleInput4" placeholder="Type Password again" />
+                                <label htmlFor="formGroupExampleInput">Password</label>
+                                <input type="password" name="password" value={password} onChange={this.onChange} className="form-control" id="formGroupExampleInput4" placeholder="Enter password" />
                             </div>
                         </div>
                         <button type="submit" className="btn btn-primary">Login</button>
@@ -46,4 +59,8 @@ export class Login extends Component {
     }
 }
 
-export default Login
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { login })(Login)

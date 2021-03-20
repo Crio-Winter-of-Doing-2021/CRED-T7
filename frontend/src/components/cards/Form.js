@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addCard } from '../../actions/cards';
+import { Redirect, withRouter } from "react-router-dom";
 
 export class Form extends Component {
     state = {
@@ -24,13 +25,15 @@ export class Form extends Component {
         e.preventDefault();
         // console.log(e)
         const { card_number, owner_name, bank, cvv, expiry } = this.state;
-        const [year, month] = expiry[0].split('-');
-        const card = { card_number, owner_name, bank, cvv, month, year };
+        const [expiry_date_year, expiry_date_month] = expiry[0].split('-');
+        const card = { "card_number": card_number[0], "owner_name": owner_name[0], "bank": bank[0], "cvv": cvv[0], expiry_date_month, expiry_date_year };
         this.props.addCard(card);
+        this.props.history.push("/");
     };
 
     render() {
-        const { card_number, owner_name, bank, cvv, expiry } = this.state
+        const { card_number, owner_name, bank, cvv, expiry } = this.state;
+        const formSubmitted = this.state.formSubmitted;
         return (
             <form onSubmit={this.onSubmit} className="card card-body p-4 m-5 container" >
                 <h2>Add Card</h2>

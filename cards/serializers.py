@@ -43,7 +43,7 @@ class CardSerializer(serializers.ModelSerializer):
         try:
             if(len(value) != 3):
                 raise serializers.ValidationError(
-                    "CVV should have 3 digits")
+                    "CVV should have 3 digits.")
             return value
 
         except ValueError:
@@ -66,10 +66,10 @@ class CardSerializer(serializers.ModelSerializer):
             num = int(value)
             if(len(value) != 2):
                 raise serializers.ValidationError(
-                    "Month should have 2 digits, in the form of MM")
+                    "Month should have 2 digits, in the form of MM.")
             if((num <= 0 or num > 13)):
                 raise serializers.ValidationError(
-                    "Month value should be between 1 and 12")
+                    "Month value should be between 1 and 12.")
             return value
 
         except ValueError:
@@ -81,11 +81,11 @@ class CardSerializer(serializers.ModelSerializer):
             num = int(value)
             if(len(value) != 4):
                 raise serializers.ValidationError(
-                    "Year should have 4 digits, in the form of YYYY")
+                    "Year should have 4 digits, in the form of YYYY.")
             print(yearn)
             if(num < yearn):
                 raise serializers.ValidationError(
-                    "Card expired, enter another card")
+                    "Card expired, add another card.")
             return value
 
         except ValueError:
