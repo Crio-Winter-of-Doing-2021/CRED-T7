@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import ReactDom from 'react-dom';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
+import NotFound404 from './common/NotFound404';
 import Dashboard from './cards/Dashboard';
 import Favicon from 'react-favicon';
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
@@ -31,6 +32,7 @@ class App extends Component {
                             <Route exact path="/login" component={Login} />
                             <PrivateRoute exact path="/addcard" component={Form} />
                             <PrivateRoute exact path="/cards" component={Cards} />
+                            <Route exact path="*" component={NotFound404} />
                         </Switch>
                         {/* <Footer /> */}
                     </Fragment>
