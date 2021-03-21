@@ -10,7 +10,7 @@ db.sqlite3
 *$py.class 
 
 # login val #
-cred_app/logindet.py
+cred_app/.env
 
 # Installer logs 
 pip-log.txt 
