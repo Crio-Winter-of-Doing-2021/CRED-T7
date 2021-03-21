@@ -36,7 +36,7 @@ export const addCard = (card) => (dispatch, getState) => {
         }
     };
 
-    console.log("Card", card)
+    // console.log("Card", card)
 
     if (token) {
         config.headers['Authorization'] = `Token ${token}`;

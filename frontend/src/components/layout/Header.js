@@ -15,7 +15,7 @@ export class Header extends Component {
         const authLinks = (
             <ul className="navbar-nav pl-4">
                 <li className="nav-item m-1">
-                    <a className="nav-link text-light" aria-current="page" href="">Home</a>
+                    <a className="nav-link btn text-light" aria-current="page" href="">Home</a>
                 </li>
                 <li className="nav-item m-1">
                     <button className="nav-link btn">
@@ -26,7 +26,7 @@ export class Header extends Component {
                         <Link className="text-light" style={{ textDecoration: "none" }} to="/cards">View Cards </Link></button>
                 </li>
                 <li className="nav-item m-1">
-                    <button onClick={this.props.logout} className="nav-link btn text-light" >Logout</button>
+                    <a onClick={this.props.logout} className="nav-link btn text-light" >Logout</a>
                 </li>
             </ul>
         )
