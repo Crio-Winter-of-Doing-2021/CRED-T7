@@ -15,7 +15,7 @@ from rest_framework import permissions
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+from cred_app.logindet import *
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -92,8 +92,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'cred_app',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'USER': user_val,
+        'PASSWORD': pass_val,
         'HOST': 'localhost',
         'PORT': 5433,
     }

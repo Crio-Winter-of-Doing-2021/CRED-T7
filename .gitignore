@@ -9,6 +9,9 @@ db.sqlite3
 *.py[cod] 
 *$py.class 
 
+# login val #
+cred_app/logindet.py
+
 # Installer logs 
 pip-log.txt 
 pip-delete-this-directory.txt 
