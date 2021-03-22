@@ -68,7 +68,7 @@ export const register = ({ username, password, email }) => (dispatch) => {
 
     const body = { "username": username[0], "password": password[0], "email": email[0] };
 
-    axios.post('/register', body, config)
+    axios.post('/signup', body, config)
         .then(response => {
             dispatch({
                 type: REGISTER_SUCCESS,

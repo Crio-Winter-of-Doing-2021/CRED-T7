@@ -10,6 +10,7 @@ import Login from './accounts/login';
 import Register from './accounts/register';
 import Form from './cards/Form';
 import Cards from './cards/Cards';
+import Card from './cards/Card';
 import { Provider } from 'react-redux';
 import store from '../store';
 import PrivateRoute from './common/PrivateRoute';
@@ -32,6 +33,7 @@ class App extends Component {
                             <Route exact path="/login" component={Login} />
                             <PrivateRoute exact path="/addcard" component={Form} />
                             <PrivateRoute exact path="/cards" component={Cards} />
+                            <PrivateRoute exact path="/cards/:id" component={Card} />
                             <Route exact path="*" component={NotFound404} />
                         </Switch>
                         {/* <Footer /> */}

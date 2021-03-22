@@ -18,12 +18,12 @@ export class Header extends Component {
                     <a className="nav-link btn text-light" aria-current="page" href="">Home</a>
                 </li>
                 <li className="nav-item m-1">
-                    <button className="nav-link btn">
-                        <Link className="text-light" style={{ textDecoration: "none" }} to="/addcard"> Add Card</Link></button>
+                    <a className="nav-link btn">
+                        <Link className="text-light" style={{ textDecoration: "none" }} to="/addcard"> Add Card</Link></a>
                 </li>
                 <li className="nav-item m-1">
-                    <button className="nav-link btn">
-                        <Link className="text-light" style={{ textDecoration: "none" }} to="/cards">View Cards </Link></button>
+                    <a className="nav-link btn">
+                        <Link className="text-light" style={{ textDecoration: "none" }} to="/cards">View Cards </Link></a>
                 </li>
                 <li className="nav-item m-1">
                     <a onClick={this.props.logout} className="nav-link btn text-light" >Logout</a>
@@ -34,15 +34,18 @@ export class Header extends Component {
         const guestLinks = (
             <ul className="navbar-nav pl-4">
                 <li className="nav-item m-1">
-                    <Link to="/register" className="nav-link" href="">Register</Link>
+                    <a className="nav-link btn">
+                        <Link to="/register" className="nav-link" href="">Register</Link>
+                    </a>
                 </li>
                 <li className="nav-item m-1">
-                    <Link to="/login" className="nav-link" href="">Login</Link>
+                    <Link to="/login" className="nav-link btn" href="">Login</Link>
+
                 </li>
             </ul>
         )
         return (
-            <nav className="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
+            <nav style={{ margin: "0" }} className="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="">
                         <span>
