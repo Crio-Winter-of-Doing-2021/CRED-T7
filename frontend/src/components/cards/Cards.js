@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCards } from '../../actions/cards';
-
+import { Link } from "react-router-dom";
 
 export class Cards extends Component {
     static propTypes = {
@@ -36,7 +36,11 @@ export class Cards extends Component {
                                     <td>{card.bank}</td>
                                     <td>{`${card.expiry_date_month}/${card.expiry_date_year}`}</td>
                                     <td>{card.credit}</td>
-                                    <td><button className="btn btn-info btn-sm">View Statement</button></td>
+                                    <td>
+                                        <Link to={`/cards/${card.id}`}>
+                                            <a className="btn btn-info btn-sm">View Statement</a>
+                                        </Link>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

@@ -1,4 +1,5 @@
 export const GET_CARDS = "GET_CARDS"
+export const GET_CARD = "GET_CARD"
 export const ADD_CARD = "ADD_CARD"
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS"
 export const REGISTER_FAIL = "REGISTER_FAIL"
