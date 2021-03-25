@@ -24,9 +24,9 @@ export class Card extends Component {
     render() {
         let card = null
         if (this.props.card) {
-            card = <form onSubmit={this.onSubmit} className="card card-body p-4 m-5 container" >
-                <h3>Your Card</h3>
-                <div className="row py-3">
+            card = <form onSubmit={this.onSubmit} className="bg-white mt-6 w-1/2 shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container" >
+                <p className="h3 pb-3">Your Card</p>
+                <div className="row py-1">
                     <div className="form-group col-md-6">
                         <label className="h5" htmlFor="formGroupExampleInput">Credit Card Number</label>
                         <p>

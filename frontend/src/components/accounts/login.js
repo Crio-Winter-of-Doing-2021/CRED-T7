@@ -37,8 +37,8 @@ export class Login extends Component {
             <div className="col-md-10 m-auto">
                 <div className="card card-body mt-5">
                     <form className="p-4" onSubmit={this.onSubmit}>
-                        <h2 className="text-center">Login</h2>
-                        <div className="row">
+                        <p className="h2 text-center text-4xl dark:text-red pb-3">Login</p>
+                        <div className="row pt-2">
                             <div className="form-group col-md-6">
                                 <label htmlFor="formGroupExampleInput">Username</label>
                                 <input type="text" name="username" value={username} onChange={this.onChange} className="form-control" id="formGroupExampleInput1" placeholder="Enter usename" />
@@ -49,8 +49,8 @@ export class Login extends Component {
                             </div>
                         </div>
                         <button type="submit" className="btn btn-primary">Login</button>
-                        <p className="mt-4">
-                            Don't have an account? <Link to="/register">Register</Link>
+                        <p className="mt-4 text-lg">
+                            Don't have an account? <Link to="/register">Register Here</Link>
                         </p>
                     </form>
                 </div>

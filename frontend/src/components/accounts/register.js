@@ -49,7 +49,7 @@ export class Register extends Component {
             <div className="col-md-10 m-auto">
                 <div className="card card-body mt-5">
                     <form className="p-4" onSubmit={this.onSubmit}>
-                        <h2 className="text-center">Register</h2>
+                        <h2 className="h2 text-center text-4xl dark:text-red pb-3">Register</h2>
                         <div className="row">
                             <div className="form-group col-md-6">
                                 <label htmlFor="formGroupExampleInput">Name</label>
@@ -69,8 +69,8 @@ export class Register extends Component {
                             </div>
                         </div>
                         <button type="submit" className="btn btn-primary">Register</button>
-                        <p className="mt-4">
-                            Already have an account? <Link to="/login">Login</Link>
+                        <p className="mt-4 text-lg">
+                            Already have an account? <Link to="/login">Login Here</Link>
                         </p>
                     </form>
                 </div>
