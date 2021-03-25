@@ -37,7 +37,7 @@ export class Form extends Component {
 
         return (
             <form onSubmit={this.onSubmit} className="bg-white mt-6  shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container w-auto" >
-                <h2 className="text-2xl font-semibold">Add Card</h2>
+                <h2 className="text-2xl font-semibold">New Card</h2>
                 <div className="row py-3">
                     <div className="form-group col-md-6">
                         <label className="font-medium" htmlFor="formGroupExampleInput">Credit Card Number</label>
