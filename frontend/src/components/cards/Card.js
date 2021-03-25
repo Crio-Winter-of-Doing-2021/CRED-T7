@@ -23,7 +23,9 @@ export class Card extends Component {
 
     render() {
         let card = null
+        let pay = null
         if (this.props.card) {
+            console.log("Credit", this.props.card.credit)
             card = <form onSubmit={this.onSubmit} className="bg-white mt-6 w-1/2 shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container" >
                 <p className="h3 pb-3">Your Card</p>
                 <div className="row py-1">
@@ -59,16 +61,38 @@ export class Card extends Component {
                     </div>
                 </div>
             </form>
+            if (this.props.card.credit > 0.00) {
+                pay = <button type="button" className="py-2 px-4  bg-black hover:bg-indigo-900
+            text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md 
+           focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
+                    Pay Bill
+       </button>
+            }
+            else {
+                pay = <button type="button" title="No cards added yet." disabled=" " className="btn bg-green-600 cursor-not-allowed">
+                    <p className="card-text text-light">No pending bills to pay. Chill out!</p>
+                </button>
+            }
+
         }
         else {
-            card = <div>
-                No card to show here. <Link to="/cards">Go Back</Link>
+            card = <div className="bg-black text-gray-100 mt-6 w-1/2 shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container">
+                No card to show here. <Link to="/cards" className="hover:bg-white">Go Back</Link>
             </div>
         }
+
+
         return (
             <div>
-                {card}
+                <div className="flex justify-center">
+                    {card}
+                </div>
+                <div className="flex justify-center">
+                    {pay}
+                </div>
             </div>
+
+
         )
     }
 }
