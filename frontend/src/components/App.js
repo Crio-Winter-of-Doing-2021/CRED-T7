@@ -15,6 +15,7 @@ import { Provider } from 'react-redux';
 import store from '../store';
 import PrivateRoute from './common/PrivateRoute';
 import { loadUser } from '../actions/auth';
+import "../style/main.css";
 
 class App extends Component {
     componentDidMount() {

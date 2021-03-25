@@ -34,22 +34,19 @@ export class Header extends Component {
         const guestLinks = (
             <ul className="navbar-nav pl-4">
                 <li className="nav-item m-1">
-                    <a className="nav-link btn">
-                        <Link to="/register" className="nav-link" href="">Register</Link>
-                    </a>
+                    <Link to="/register" className="nav-link" href="">Register</Link>
                 </li>
                 <li className="nav-item m-1">
-                    <Link to="/login" className="nav-link btn" href="">Login</Link>
-
+                    <Link to="/login" className="nav-link" href="">Login</Link>
                 </li>
             </ul>
         )
         return (
-            <nav style={{ margin: "0" }} className="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
+            <nav style={{ margin: "0" }} className="navbar sticky-top navbar-expand-sm navbar-dark bg-black">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="">
                         <span>
-                            <img className="img-fluid mr-1 d-inline-block align-center " width="30" src="https://scrnshts.club/wp-content/uploads/2019/09/icon-3.jpg"></img>
+                            <img className="img-fluid mr-1 d-inline-block align-center " width="50" src="https://scrnshts.club/wp-content/uploads/2019/09/icon-3.jpg"></img>
                             CRED
                         </span>
                     </a>

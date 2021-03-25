@@ -2,40 +2,60 @@ import React, { Component, Fragment } from 'react';
 import Cards from './Cards';
 import Form from './Form';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getCards } from '../../actions/cards';
+
 
 export class Dashboard extends Component {
+    static propTypes = {
+        cards: PropTypes.array.isRequired,
+        getCards: PropTypes.func.isRequired
+    }
+
+    componentDidMount() {
+        this.props.getCards();
+        console.log(this.props.cards.cards)
+    }
+
     render() {
+        const ifcards =
+            <Link to="/cards"> <button href="" className="btn btn-primary mt-2">
+                <p className="card-text text-light">View Cards</p>
+            </button></Link>
+        const nocards =
+            <button type="button" data-toggle="tooltip" data-placement="bottom" title="No cards added yet." disabled=" " className="btn btn-primary cursor-not-allowed">
+                <p className="card-text text-light">View Cards</p>
+            </button>
+
         return (
             <Fragment>
-                <div className="container inline my-5">
-                    <div className="col-sm-6 m-3">
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">Add a Card</h5>
-                                <p className="card-text">Want to add a Card? Click Below</p>
+                <div className="flex justify-center items-center mt-6">
+                    <div className="sm:flex justify-center items-center text-center gap-14">
+                        <div className="sm:w-1/2 md:w-1/2 lg:w-1/4 h-56 w-56 px-4 py-4 bg-white mt-6  shadow-lg rounded-lg dark:bg-gray-800">
+                            <h5 className="card-title font-semibold">Add a Card</h5>
+                            <p className="card-text">Want to add a Card? Click Below</p>
 
-                                <Link to="/addcard">
-                                    <button className="btn btn-primary">
-                                        <p className="card-text text-light">Add Card</p></button></Link>
-                            </div>
+                            <Link to="/addcard">
+                                <button className="btn btn-primary mt-16">
+                                    <p className="card-text text-light">Add Card</p></button></Link>
                         </div>
-                    </div>
-                    <div className="col-sm-6 m-3">
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">View Your Cards</h5>
-                                <p className="card-text">Want to view your cards and manage their statements? Click Below</p>
+                        <div className="min-w-4 sm:w-1/2 md:w-1/2 lg:w-1/4 h-56 w-56 px-4 py-4 bg-white mt-6  shadow-lg rounded-lg dark:bg-gray-800">
+                            <h5 className="card-title font-semibold">View Your Cards</h5>
+                            <p className="card-text">Want to view your cards and manage their statements? Click Below</p>
 
-                                <Link to="/cards"> <button href="" className="btn btn-primary">
-                                    <p className="card-text text-light">View Cards</p>
-                                </button></Link>
-                            </div>
+                            {this.props.cards ? ifcards : nocards}
                         </div>
                     </div>
                 </div>
+
             </Fragment>
         )
     }
 }
 
-export default Dashboard
+const mapStateToProps = state => ({
+    cards: state.cards.cards
+});
+
+export default connect(mapStateToProps, { getCards })(Dashboard);
