@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { ADD_CARD, GET_CARDS } from './types';
 
-export const getCards = () => (dispatch, getState) => {
+export const getCards = (page) => (dispatch, getState) => {
     const token = getState().auth.token
 
     const config = {
@@ -14,7 +14,7 @@ export const getCards = () => (dispatch, getState) => {
     if (token) {
         config.headers['Authorization'] = `Token ${token}`;
 
-        axios.get('/cards', config)
+        axios.get(`/cards?page=${page}`, config)
             .then(response => {
                 dispatch({
                     type: GET_CARDS,

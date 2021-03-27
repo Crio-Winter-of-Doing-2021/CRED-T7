@@ -1,4 +1,4 @@
-import { GET_CARD } from "./types";
+import { GET_CARD, CLEAR_CARD } from "./types";
 import axios from "axios";
 
 export const getCard = (id) => (dispatch, getState) => {
@@ -23,5 +23,11 @@ export const getCard = (id) => (dispatch, getState) => {
     }
     else {
         alert("You are not logged in!");
+    }
+}
+
+export const clearCardData = () => {
+    return {
+        type: CLEAR_CARD
     }
 }

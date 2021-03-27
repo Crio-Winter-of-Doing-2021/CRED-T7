@@ -1,7 +1,7 @@
 import { GET_CARDS, ADD_CARD } from '../actions/types'
 
 const initialState = {
-    cards: []
+    cards: {},
 }
 
 export default function (state = initialState, action) {
@@ -14,8 +14,9 @@ export default function (state = initialState, action) {
     }
     else if (action.type == "ADD_CARD") {
         console.log(action.payload)
+        state.cards.results.push(action.payload)
         return {
-            cards: [...state.cards, action.payload]
+            cards: { ...state.cards }
         };
 
     }
