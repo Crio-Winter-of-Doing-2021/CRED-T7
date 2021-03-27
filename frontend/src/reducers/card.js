@@ -1,6 +1,7 @@
 
 const initialState = {
-    card: null
+    card: null,
+    transactions: null
 }
 
 export default function (state = initialState, action) {
@@ -12,11 +13,20 @@ export default function (state = initialState, action) {
         };
 
     }
-    if (action.type == "CLEAR_CARD") {
+    else if (action.type == "CLEAR_CARD") {
         return {
             ...state,
-            card: null
+            card: null,
+            transactions: null
         }
+    }
+    else if (action.type == "GET_TRANSACTION") {
+        // console.log(action.payload)
+        return {
+            ...state,
+            transactions: action.payload
+        };
+
     }
     else {
         return state;
