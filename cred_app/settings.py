@@ -23,11 +23,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'xf$p!*#c-17j5+7&$_&#azplg9s8__9y2+81z(96k=#0vt(dlq'
+import environ
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# False if not in os.environ
+# DEBUG = os.environ.get('DEBUG')
+DEBUG = env('DEBUG')
 
+# Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
+SECRET_KEY = env('SECRET_KEY')
 ALLOWED_HOSTS = []
 
 
@@ -95,10 +101,23 @@ WSGI_APPLICATION = 'cred_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'cred_app',
+        'USER': env('user_val'),
+        'PASSWORD': env('pass_val'),
+        'HOST': 'localhost',
+        'PORT': 5433,
     }
 }
 
