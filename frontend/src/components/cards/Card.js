@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from "react-redux";
-import { getCard, clearCardData } from '../../actions/card';
+import { getCard, clearCardData, viewTransactions } from '../../actions/card';
 import { Link } from "react-router-dom";
 
 export class Card extends Component {
     static propTypes = {
         getCard: PropTypes.func.isRequired,
         clearCardData: PropTypes.func.isRequired,
-        card: PropTypes.object
+        card: PropTypes.object,
+        transactions: PropTypes.object,
+        viewTransactions: PropTypes.func.isRequired
     }
 
     componentDidMount() {
@@ -16,6 +18,7 @@ export class Card extends Component {
             // console.log(this.props.match.params.id)
             const id = this.props.match.params.id;
             this.props.getCard(id);
+            this.props.viewTransactions(id);
         }
         else {
             alert("Error Occured");
@@ -29,6 +32,7 @@ export class Card extends Component {
     render() {
         let card = null
         let pay = null
+        let trans = null
         if (this.props.card) {
             // console.log("Credit", this.props.card.credit)
             card = <form onSubmit={this.onSubmit} className="bg-white mt-6 w-1/2 shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container" >
@@ -87,11 +91,86 @@ export class Card extends Component {
 
         }
         else {
-            card = <div className="bg-black text-gray-100 mt-6 w-1/2 shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container">
+            card = <div className="bg-black text-gray-100 mt-6 w-1/2 shadow-lg rounded-lg  p-4 m-5 container">
                 No card to show here. <Link to="/cards" className="hover:bg-white">Go Back</Link>
             </div>
         }
 
+        if (this.props.transactions && this.props.transactions.results.length > 0) {
+            console.log(this.props.transactions.results.length)
+            trans = <div>
+                <div className="flex justify-center">
+                    <div className="py-8">
+                        <div className="">
+                            <div className="inline-block min-w-full shadow rounded-lg ">
+                                <table className="container font-normal">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" className="px-5 py-3 text-center  bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
+                                                Vendor
+                                             </th>
+                                            <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
+                                                Type
+                                            </th>
+                                            <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
+                                                Category
+                                            </th>
+                                            <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
+                                                Date
+                                             </th>
+                                            <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
+                                                Amount
+                                            </th>
+                                            <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.props.transactions.results.map(transac => (
+                                            <tr key={transac.id}>
+                                                <td className="px-5 py-5 text-center border-b border-gray-200 bg-white text-sm">
+                                                    <p>{transac.vendor}
+                                                    </p></td>
+                                                <td className="px-5 py-5 text-center border-b border-gray-200 bg-white text-sm">
+                                                    <p>{transac.CreditorDebit}
+                                                    </p></td>
+                                                <td className="px-5 py-5 text-center border-b border-gray-200 bg-white text-sm">
+                                                    <p>{transac.category}
+                                                    </p></td>
+                                                <td className="px-5 py-5 text-center border-b border-gray-200 bg-white text-sm">
+                                                    <p>{`${transac.month}/${transac.year}`}
+                                                    </p>
+                                                </td>
+                                                <td className="px-5 py-5 text-center border-b border-gray-200 bg-white text-sm">
+                                                    <p>₹ {transac.amount}
+                                                    </p></td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="flex justify-center">
+                    <button disabled={this.props.transactions.results && this.props.transactions.previous == null} onClick={(state) => this.setState({ ...state, page: this.state.page - 1 })} className={`flex items-center p-3 mx-1 transition ease-in 
+                    duration-200 uppercase  border-2 
+                    border-gray-900 focus:outline-none ${this.props.transactions.previous ? "hover:bg-gray-800 hover:text-white" : "cursor-not-allowed "}`}>
+                        Prev
+                        </button>
+                    <button disabled={this.props.transactions.results && this.props.transactions.next == null} onClick={(state) => this.setState({ ...state, page: this.state.page + 1 })} className={`flex items-center p-3 mx-1 transition ease-in 
+                    duration-200 uppercase   border-2 
+                    border-gray-900 focus:outline-none ${this.props.transactions.next ? "hover:bg-gray-800 hover:text-white" : "cursor-not-allowed "}`}>
+                        Next
+                        </button>
+                </div>
+            </div>
+        }
+        else {
+            trans = <div className="bg-black text-white mt-6 w-1/2 shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container">
+                No transactions to show for this card.
+            </div>
+        }
 
         return (
             <div>
@@ -101,15 +180,17 @@ export class Card extends Component {
                 <div className="flex justify-center">
                     {pay}
                 </div>
+                <div className="flex justify-center">
+                    {trans}
+                </div>
             </div>
-
-
         )
     }
 }
 
 const mapStateToProps = state => ({
-    card: state.card.card
+    card: state.card.card,
+    transactions: state.card.transactions
 })
 
-export default connect(mapStateToProps, { getCard, clearCardData })(Card)
+export default connect(mapStateToProps, { getCard, clearCardData, viewTransactions })(Card)

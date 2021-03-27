@@ -23,7 +23,7 @@ class TransactionIsOwnerOrNot(permissions.BasePermission):
 
 class CustomSetPagination(PageNumberPagination):
     page_size = 10
-    pzge_size_query_param = 'page_size'
+    page_size_query_param = 'page_size'
 
 
 class addCard(generics.ListCreateAPIView):
@@ -40,6 +40,7 @@ class addCard(generics.ListCreateAPIView):
         })
 
     def get_queryset(self):
+        # print(self.request.user.cards.order_by('-id'))
         return self.request.user.cards.order_by('-id')
 
 
@@ -83,15 +84,15 @@ class addTransaction(generics.ListCreateAPIView):
         return card.transactions.all()
 
 
-class viewTransaction(generics.RetrieveAPIView):
+class viewTransaction(generics.ListAPIView):
     pagination_class = CustomSetPagination
     serializer_class = TransactionSerializer
     permission_classes = [permissions.IsAuthenticated, TransactionIsOwnerOrNot]
 
-    def get(self, request, pk):
-        card = get_object_or_404(self.request.user.cards, pk=pk)
-        # print(card.transactions.all())
-        return Response(card.transactions.all())
+    def get_queryset(self):
+        card = get_object_or_404(self.request.user.cards, pk=self.kwargs['pk'])
+        print(card.transactions.all())
+        return card.transactions.all()
 
 
 class payCard(generics.CreateAPIView):

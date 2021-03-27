@@ -44,7 +44,7 @@ export class Dashboard extends Component {
                             <p className="card-text">Want to add a Card? Click Below</p>
 
                             <Link to="/addcard">
-                                <button className="btn btn-primary mt-16">
+                                <button className="btn btn-primary mt-6">
                                     <p className="card-text text-light">Add Card</p></button></Link>
                         </div>
                         <div className="min-w-4 w-1/2 h-56 hover:bg-indigo-900
