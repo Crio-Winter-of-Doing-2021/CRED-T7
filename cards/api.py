@@ -22,7 +22,7 @@ class TransactionIsOwnerOrNot(permissions.BasePermission):
 
 
 class CustomSetPagination(PageNumberPagination):
-    page_size = 2
+    page_size = 10
     pzge_size_query_param = 'page_size'
 
 
