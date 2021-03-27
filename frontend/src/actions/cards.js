@@ -51,7 +51,7 @@ export const addCard = (card) => (dispatch, getState) => {
                 // console.log(err.response.data)
                 let message = "";
                 for (const key in err.response.data) {
-                    message += `${key} : ${err.response.data[key]} \n`;
+                    message += "\n" + `${key} : ${err.response.data[key]}`;
                 }
                 alert(message);
             }

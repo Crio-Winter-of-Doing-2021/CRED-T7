@@ -79,10 +79,19 @@ class addTransaction(generics.ListCreateAPIView):
         })
 
     def get_queryset(self):
-        # print(self.kwargs['month'], self.kwargs['year'])
         card = get_object_or_404(self.request.user.cards, pk=self.kwargs['pk'])
-        # return Transactions.objects.all()
         return card.transactions.all()
+
+
+class viewTransaction(generics.RetrieveAPIView):
+    pagination_class = CustomSetPagination
+    serializer_class = TransactionSerializer
+    permission_classes = [permissions.IsAuthenticated, TransactionIsOwnerOrNot]
+
+    def get(self, request, pk):
+        card = get_object_or_404(self.request.user.cards, pk=pk)
+        # print(card.transactions.all())
+        return Response(card.transactions.all())
 
 
 class payCard(generics.CreateAPIView):
@@ -93,9 +102,11 @@ class payCard(generics.CreateAPIView):
         card = get_object_or_404(request.user.cards.all(), pk=kwargs['pk'])
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+
         if(serializer.validated_data['pay_amount'] > card.credit):
             raise serializers.ValidationError(
                 'The payment should be less than or equal to what is to be paid.')
+
         card.credit -= serializer.validated_data['pay_amount']
         card.save()
         return Response({'Payment Billed': serializer.validated_data['pay_amount']})

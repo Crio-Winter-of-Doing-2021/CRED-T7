@@ -30,7 +30,7 @@ export class Card extends Component {
         let card = null
         let pay = null
         if (this.props.card) {
-            console.log("Credit", this.props.card.credit)
+            // console.log("Credit", this.props.card.credit)
             card = <form onSubmit={this.onSubmit} className="bg-white mt-6 w-1/2 shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container" >
                 <p className="h3 pb-3">Your Card</p>
                 <div className="row py-1">
@@ -62,6 +62,12 @@ export class Card extends Component {
                         <label className="h5" htmlFor="formGroupExampleInput2">Bank Name</label>
                         <p>
                             {this.props.card.bank}
+                        </p>
+                    </div>
+                    <div className="form-group col-md-6">
+                        <label className="h5" htmlFor="formGroupExampleInput2">Outstanding Balance</label>
+                        <p className={this.props.card.credit > 0 ? `text-red-600 font-semibold` : 'text-green-600 font-semibold'}>
+                            ₹{this.props.card.credit}
                         </p>
                     </div>
                 </div>
