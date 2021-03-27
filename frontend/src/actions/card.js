@@ -19,7 +19,7 @@ export const getCard = (id) => (dispatch, getState) => {
                     type: GET_CARD,
                     payload: response.data
                 })
-            }).catch(err => console.log(err))
+            }).catch(err => alert(err))
     }
     else {
         alert("You are not logged in!");

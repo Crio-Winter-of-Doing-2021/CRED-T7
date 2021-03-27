@@ -12,7 +12,8 @@ export class Dashboard extends Component {
 
     static propTypes = {
         cards: PropTypes.object.isRequired,
-        getCards: PropTypes.func.isRequired
+        getCards: PropTypes.func.isRequired,
+        username: PropTypes.string.isRequired
     }
 
     componentDidMount() {
@@ -32,7 +33,10 @@ export class Dashboard extends Component {
 
         return (
             <Fragment>
-                <div className="flex justify-center items-center mt-6">
+                <div className="text-center">
+                    <p className="font-semibold h2 mt-10">Welcome Home, {this.props.username}! </p>
+                </div>
+                <div className="flex justify-center items-center mt-6 ">
                     <div className="sm:flex justify-center items-center text-center gap-14">
                         <div className="w-1/2 h-56 px-4 py-4 bg-white mt-6 hover:bg-indigo-900
              transition ease-in duration-200  shadow-lg rounded-lg dark:bg-gray-800">
@@ -59,7 +63,8 @@ export class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-    cards: state.cards.cards
+    cards: state.cards.cards,
+    username: state.auth.user.username
 });
 
 export default connect(mapStateToProps, { getCards })(Dashboard);
