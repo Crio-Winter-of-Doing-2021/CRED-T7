@@ -5,6 +5,7 @@ from .models import Cards, Transactions
 from rest_framework.views import APIView
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from rest_framework.pagination import PageNumberPagination
 
 
 class IsOwnerOrNot(permissions.BasePermission):
@@ -20,7 +21,13 @@ class TransactionIsOwnerOrNot(permissions.BasePermission):
         return obj.owner.owner == request.user
 
 
+class CustomSetPagination(PageNumberPagination):
+    page_size = 2
+    pzge_size_query_param = 'page_size'
+
+
 class addCard(generics.ListCreateAPIView):
+    pagination_class = CustomSetPagination
     serializer_class = CardSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrNot]
 
@@ -33,7 +40,7 @@ class addCard(generics.ListCreateAPIView):
         })
 
     def get_queryset(self):
-        return self.request.user.cards.all()
+        return self.request.user.cards.order_by('-id')
 
 
 class viewCard(generics.RetrieveAPIView):
@@ -55,6 +62,7 @@ class viewCard(generics.RetrieveAPIView):
 
 
 class addTransaction(generics.ListCreateAPIView):
+    pagination_class = CustomSetPagination
     serializer_class = TransactionSerializer
     permission_classes = [permissions.IsAuthenticated, TransactionIsOwnerOrNot]
 

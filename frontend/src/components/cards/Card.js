@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from "react-redux";
-import { getCard } from '../../actions/card';
+import { getCard, clearCardData } from '../../actions/card';
 import { Link } from "react-router-dom";
 
 export class Card extends Component {
     static propTypes = {
         getCard: PropTypes.func.isRequired,
+        clearCardData: PropTypes.func.isRequired,
         card: PropTypes.object
     }
 
@@ -19,6 +20,10 @@ export class Card extends Component {
         else {
             alert("Error Occured");
         }
+    }
+
+    componentWillUnmount() {
+        this.props.clearCardData();
     }
 
     render() {
@@ -101,4 +106,4 @@ const mapStateToProps = state => ({
     card: state.card.card
 })
 
-export default connect(mapStateToProps, { getCard })(Card)
+export default connect(mapStateToProps, { getCard, clearCardData })(Card)
