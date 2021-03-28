@@ -103,8 +103,9 @@ class payCard(generics.CreateAPIView):
         card = get_object_or_404(request.user.cards.all(), pk=kwargs['pk'])
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-
+        print(request.data)
         if(serializer.validated_data['pay_amount'] > card.credit):
+            print(serializer.validated_data['pay_amount'])
             raise serializers.ValidationError(
                 'The payment should be less than or equal to what is to be paid.')
 

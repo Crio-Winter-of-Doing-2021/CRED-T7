@@ -3,14 +3,20 @@ import PropTypes from 'prop-types'
 import { connect } from "react-redux";
 import { getCard, clearCardData, viewTransactions } from '../../actions/card';
 import { Link } from "react-router-dom";
-
+import { pay } from '../../actions/pay';
 export class Card extends Component {
+
+    state= {
+        amount: ''
+    }
+
     static propTypes = {
         getCard: PropTypes.func.isRequired,
         clearCardData: PropTypes.func.isRequired,
         card: PropTypes.object,
         transactions: PropTypes.object,
-        viewTransactions: PropTypes.func.isRequired
+        viewTransactions: PropTypes.func.isRequired,
+        pay: PropTypes.func
     }
 
     componentDidMount() {
@@ -25,6 +31,17 @@ export class Card extends Component {
         }
     }
 
+    onChange = e => this.setState({
+        [e.target.name]: [e.target.value]
+    });
+
+    onClick = e => {
+        // console.log(this.props.match.params.id);
+        console.log("Onclick Here");
+        console.log(this.state);
+        this.props.pay(this.props.card.id,this.state.amount);
+    };
+
     componentWillUnmount() {
         this.props.clearCardData();
     }
@@ -33,8 +50,10 @@ export class Card extends Component {
         let card = null
         let pay = null
         let trans = null
+        const { amount } = this.state;
         if (this.props.card) {
             // console.log("Credit", this.props.card.credit)
+            // console.log("lol");
             card = <form onSubmit={this.onSubmit} className="bg-white mt-6 w-1/2 shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container" >
                 <p className="h3 pb-3">Your Card</p>
                 <div className="row py-1">
@@ -79,9 +98,11 @@ export class Card extends Component {
             if (this.props.card.credit > 0.00) {
                 pay = <button type="button" className="py-2 px-4  bg-black hover:bg-indigo-900
             text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md 
-           focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
+           focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full" onClick={this.onClick} >
                     Pay Bill
+             
        </button>
+
             }
             else {
                 pay = <button type="button" title="No cards added yet." disabled=" " className="btn bg-green-600 cursor-not-allowed">
@@ -155,7 +176,7 @@ export class Card extends Component {
                 <div className="flex justify-center">
                     <button disabled={this.props.transactions.results && this.props.transactions.previous == null} onClick={(state) => this.setState({ ...state, page: this.state.page - 1 })} className={`flex items-center p-3 mx-1 transition ease-in 
                     duration-200 uppercase  border-2 
-                    border-gray-900 focus:outline-none ${this.props.transactions.previous ? "hover:bg-gray-800 hover:text-white" : "cursor-not-allowed "}`}>
+                    border-gray-900 focus:outline-none ${this.props.transactions.previous ? "hover:bg-gray-800 hover:text-white" : "cursor-not-allowed "}`} onClick={this.onClick}>
                         Prev
                         </button>
                     <button disabled={this.props.transactions.results && this.props.transactions.next == null} onClick={(state) => this.setState({ ...state, page: this.state.page + 1 })} className={`flex items-center p-3 mx-1 transition ease-in 
@@ -193,4 +214,4 @@ const mapStateToProps = state => ({
     transactions: state.card.transactions
 })
 
-export default connect(mapStateToProps, { getCard, clearCardData, viewTransactions })(Card)
+export default connect(mapStateToProps, { getCard, clearCardData, viewTransactions, pay })(Card)
