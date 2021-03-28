@@ -21,15 +21,22 @@ export class Dashboard extends Component {
     }
 
     render() {
-        const ifcards =
-            <Link to="/cards"> <button href="" className="btn btn-primary mt-2">
-                <p className="card-text text-light">View Cards</p>
-            </button></Link>
-        const nocards =
-            <button type="button" data-toggle="tooltip" data-placement="bottom" title="No cards added yet." disabled=" " className="btn btn-primary cursor-not-allowed">
-                <p className="card-text text-light">View Cards</p>
-            </button>
-        // console.log(this.props)
+        let ifcards = null;
+        // console.log(this.props.cards.length > 0 ? "true" : "false")
+        if (this.props.cards.length > 0 && this.props.cards.results.length > 0) {
+            ifcards =
+                <Link to="/cards"> <button href="" className="btn btn-primary mt-2">
+                    <p className="card-text text-light">View Cards</p>
+                </button></Link>
+        }
+        else {
+            ifcards =
+                <button type="button" data-toggle="tooltip" data-placement="bottom" title="No cards added yet." disabled=" " className="btn btn-primary cursor-not-allowed">
+                    <p className="card-text text-light">View Cards</p>
+                </button>
+            // console.log(this.props)
+        }
+
 
         return (
             <Fragment>
@@ -52,7 +59,7 @@ export class Dashboard extends Component {
                             <h5 className="card-title font-semibold">View Your Cards</h5>
                             <p className="card-text">Want to view your cards and manage their statements? Click Below</p>
 
-                            {this.props.cards.results ? ifcards : nocards}
+                            {ifcards}
                         </div>
                     </div>
                 </div>
