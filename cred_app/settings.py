@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import environ
 from rest_framework.settings import api_settings
 from datetime import timedelta
 from pathlib import Path
@@ -23,7 +24,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-import environ
 env = environ.Env()
 # reading .env file
 environ.Env.read_env()
@@ -109,15 +109,14 @@ WSGI_APPLICATION = 'cred_app.wsgi.application'
 # }
 
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cred_app',
+        'NAME': 'dfra804ce98bhn',
         'USER': env('user_val'),
         'PASSWORD': env('pass_val'),
-        'HOST': 'localhost',
-        'PORT': 5433,
+        'HOST': 'ec2-54-167-168-52.compute-1.amazonaws.com',
+        'PORT': 5432,
     }
 }
 
