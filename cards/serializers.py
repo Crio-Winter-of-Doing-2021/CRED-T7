@@ -35,9 +35,29 @@ def checkLuhn(cardNo):
 
 
 class CardSerializer(serializers.ModelSerializer):
+
+    banks = {'SBI': 'sbi.co.in', 'HDFC': 'hdfcbank.com', 'Standard Chartered Bank': 'sc.com', 'YES Bank': 'yesbank.in',
+             'Citibank': 'citibank.co.in', 'ICICI Bank': 'icicibank.com',
+             'American Express': 'americanexpress.com', 'IndusInd Bank': 'indusind.com',
+             'RBL Bank': 'rblbank.com', 'Allahabad Bank': 'allahabadbank.com', 'Bajaj Finserv': 'bajajfinserv.in',
+             'Andhra Bank': 'andhrabank.in', 'Axis Bank': 'axisbank.com', 'Bank of India': 'bankofindia.comb',
+             'Bank of Baroda': 'bobibanking.com', 'Bank of Maharashtra': 'bankofmaharashtra.in',
+             'Canara Bank': 'canarabank.com', 'Central Bank of India': 'centralbankofindia.co.in', 'DCB Bank': 'dcbbank.com',
+             'Federal Bank': 'federalbank.co.in', 'HSBC Bank': 'hsbc.com', 'IDBI Bank': 'idbibank.in', 'Indian Bank': 'indianbank.in',
+             'Kotak Mahindra Bank': 'kotak.com', 'Nainital Bank': 'nainitalbank.co.in', 'Punjab National Bank': 'pnbindia.in',
+             'Tata Capital': 'tatacapital.com', 'UCO Bank': 'ucobank.com', 'Union Bank of India': 'unionbankofindia.co.in', 'Vijaya Bank': 'vijayabank.com'}
+    bank_domain = serializers.SerializerMethodField('get_bank_domain')
+
+    def get_bank_domain(self, obj):
+        if(obj.bank in self.banks):
+            return self.banks[obj.bank]
+        else:
+            return "Not Mentioned"
+
     class Meta:
         model = Cards
-        fields = '__all__'
+        fields = ['id', 'bank', 'card_number', 'owner_name', 'cvv',
+                  'expiry_date_month', 'expiry_date_year', 'bank_domain', 'credit']
 
     def validate_cvv(self, value):
         try:

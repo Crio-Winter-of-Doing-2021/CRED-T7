@@ -22,8 +22,8 @@ export class Dashboard extends Component {
 
     render() {
         let ifcards = null;
-        // console.log(this.props.cards.length > 0 ? "true" : "false")
-        if (this.props.cards.length > 0 && this.props.cards.results.length > 0) {
+        // console.log(this.props.cards)
+        if (this.props.cards.count > 0 && this.props.cards.results.length > 0) {
             ifcards =
                 <Link to="/cards"> <button href="" className="btn btn-primary mt-2">
                     <p className="card-text text-light">View Cards</p>

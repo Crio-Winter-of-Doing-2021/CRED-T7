@@ -8,10 +8,17 @@ export class Form extends Component {
     state = {
         card_number: '',
         owner_name: '',
-        bank: '',
+        bank: null,
         cvv: '',
         expiry: '',
     }
+
+    banks = ['Allahabad Bank', 'American Express', 'Andhra Bank', 'Axis Bank', 
+    'Bajaj Finserv', 'Bank of Baroda', 'Bank of India', 'Bank of Maharashtra', 'Canara Bank', 
+    'Central Bank of India', 'Citibank', 'DCB Bank', 'Federal Bank', 'HDFC', 'HSBC Bank', 'ICICI Bank',
+     'IDBI Bank', 'Indian Bank', 'IndusInd Bank', 'Kotak Mahindra Bank', 
+     'Nainital Bank', 'Punjab National Bank', 'RBL Bank', 'SBI', 'Standard Chartered Bank', 
+    'Tata Capital', 'UCO Bank', 'Union Bank of India', 'Vijaya Bank', 'YES Bank']
 
     static propTypes = {
         addCard: PropTypes.func.isRequired
@@ -21,22 +28,49 @@ export class Form extends Component {
         [e.target.name]: [e.target.value]
     });
 
+    changeBank = (bank,e) =>{
+        e.preventDefault();
+        this.setState(
+            {
+                ...this.state,
+                bank:bank.bank
+            }
+        )
+    }
+
+    
+
     onSubmit = e => {
         e.preventDefault();
-        // console.log(e)
+        console.log(this.state)
         const { card_number, owner_name, bank, cvv, expiry } = this.state;
         let [expiry_date_year, expiry_date_month] = ['', ''];
         let card = {};
         if (expiry) {
             [expiry_date_year, expiry_date_month] = expiry[0].split('-');
         }
-        card = { "card_number": card_number[0], "owner_name": owner_name[0], "bank": bank[0], "cvv": cvv[0], expiry_date_month, expiry_date_year };
+        card = { "card_number": card_number[0], "owner_name": owner_name[0], "bank": bank, "cvv": cvv[0], expiry_date_month, expiry_date_year };
         this.props.addCard(card);
     };
 
     render() {
-        const { card_number, owner_name, bank, cvv, expiry } = this.state;
-        const formSubmitted = this.state.formSubmitted;
+        const { card_number, owner_name, banks, cvv, expiry } = this.state;
+        // console.log(this.state.bank)
+        const dropdown = <div className="btn-group">
+        <button type="button" id="bank_button" className="btn btn-primary font-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {this.state.bank||'Select Bank'}
+        </button>
+        <div className="dropdown-menu overflow-scroll h-52">
+            {/* <a className="dropdown-item" onClick= {(e) => this.changeBank(e)}>Not mentioned</a>
+            <div className="dropdown-divider">
+            </div> */}
+          {this.banks.map(bank =>(
+                <a key={bank} className="dropdown-item" value={bank} onChange={this.onChange}
+                 onClick= {(e) => this.changeBank({bank},e)}>{bank}</a>
+            ))}
+        </div>
+            
+      </div>
 
         return (
             <div className="flex justify-center w-auto">
@@ -65,9 +99,11 @@ export class Form extends Component {
                         </div>
                         <div className="form-group col-md-6">
                             <label className="font-medium" htmlFor="formGroupExampleInput2">Bank Name</label>
-                            <input type="text" onChange={this.onChange} name="bank"
-                                className="form-control" id="formGroupExampleInput2" placeholder="Enter name of Bank" />
+                            <div className="">
+                        {dropdown}
                         </div>
+                        </div>
+                        
                     </div>
                     <div className="d-flex justify-content-center">
                         <button type="submit" className="btn btn-primary">Submit</button>

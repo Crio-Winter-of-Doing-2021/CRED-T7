@@ -3,15 +3,30 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
+import favicon from "../images/favicon.ico"
 
 export class Header extends Component {
     static propTypes = {
         auth: PropTypes.object.isRequired,
-        logout: PropTypes.func.isRequired
+        logout: PropTypes.func.isRequired,
+        cards: PropTypes.object
     }
 
     render() {
         const { isAuthenticated, user } = this.props.auth;
+        let viewcards = null
+        if (this.props.cards.count > 0) {
+            viewcards = <li className="nav-item m-1">
+                <a className={`nav-link btn`} >
+                    <Link className="text-light" style={{ textDecoration: "none" }} to="/cards">View Cards </Link></a>
+            </li>
+        }
+        else {
+            viewcards = <li className="nav-item m-1">
+                <a className={`nav-link btn disabled`} >
+                    <Link className="text-light" style={{ textDecoration: "none" }} to="/cards">View Cards </Link></a>
+            </li>
+        }
         const authLinks = (
             <ul className="navbar-nav pl-4">
                 <li className="nav-item m-1">
@@ -21,10 +36,7 @@ export class Header extends Component {
                     <a className="nav-link btn">
                         <Link className="text-light" style={{ textDecoration: "none" }} to="/addcard"> Add Card</Link></a>
                 </li>
-                <li className="nav-item m-1">
-                    <a className="nav-link btn">
-                        <Link className="text-light" style={{ textDecoration: "none" }} to="/cards">View Cards </Link></a>
-                </li>
+                {viewcards}
                 <li className="nav-item m-1">
                     <a onClick={this.props.logout} className="nav-link btn text-light" >Logout</a>
                 </li>
@@ -46,7 +58,7 @@ export class Header extends Component {
                 <div className="container-fluid">
                     <a className="navbar-brand" href="">
                         <span>
-                            <img className="img-fluid mr-1 d-inline-block align-center " width="50" src="https://scrnshts.club/wp-content/uploads/2019/09/icon-3.jpg"></img>
+                            <img className="img-fluid mr-1 d-inline-block align-center " width="50" src={favicon}></img>
                             CRED
                         </span>
                     </a>
@@ -63,7 +75,8 @@ export class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    cards: state.cards.cards
 })
 
 export default connect(mapStateToProps, { logout })(Header)

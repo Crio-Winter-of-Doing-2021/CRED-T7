@@ -1,5 +1,7 @@
 export const GET_CARDS = "GET_CARDS"
 export const GET_CARD = "GET_CARD"
+export const CARDS_LOADING = "CARD_LOADING"
+export const CARD_LOADING = "CARD_LOADING"
 export const GET_TRANSACTION = "GET_TRANSACTION"
 export const ADD_CARD = "ADD_CARD"
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS"
