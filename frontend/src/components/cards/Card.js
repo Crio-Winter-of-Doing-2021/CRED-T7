@@ -82,10 +82,8 @@ export class Card extends Component {
                         </p>
                     </div>
                     <div className="form-group col-md-6">
-                        <label className="h5" htmlFor="formGroupExampleInput2">Bank Name</label>
-                        <p>
-                            {this.props.card.bank}
-                        </p>
+                        <label className="h5" htmlFor="formGroupExampleInput2">Bank</label>
+                        <img title={this.props.card.bank} src={`//logo.clearbit.com/${this.props.card.bank_domain}?size=80`} />
                     </div>
                     <div className="form-group col-md-6">
                         <label className="h5" htmlFor="formGroupExampleInput2">Outstanding Balance</label>

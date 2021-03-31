@@ -17,6 +17,7 @@ import store from '../store';
 import PrivateRoute from './common/PrivateRoute';
 import { loadUser } from '../actions/auth';
 import "../style/main.css";
+import favicon from "./images/favicon.ico"
 
 class App extends Component {
     componentDidMount() {
@@ -50,7 +51,7 @@ class App extends Component {
 
 ReactDom.render(
     <Fragment>
-        <Favicon url="https://scrnshts.club/wp-content/uploads/2019/09/icon-3.jpg" />
+        <Favicon url={favicon} />
         <App />
     </Fragment>
 

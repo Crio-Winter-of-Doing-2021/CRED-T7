@@ -1,8 +1,12 @@
 import axios from 'axios';
 
-import { ADD_CARD, GET_CARDS } from './types';
+import { ADD_CARD, GET_CARDS, CARDS_LOADING } from './types';
 
 export const getCards = (page) => (dispatch, getState) => {
+    dispatch({
+        type: CARDS_LOADING
+    })
+
     const token = getState().auth.token
 
     const config = {

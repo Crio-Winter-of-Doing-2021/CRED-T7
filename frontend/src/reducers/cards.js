@@ -1,13 +1,21 @@
-import { GET_CARDS, ADD_CARD } from '../actions/types'
+import { GET_CARDS, ADD_CARD, CARDS_LOADING } from '../actions/types'
 
 const initialState = {
     cards: {},
+    isLoaded: null
 }
 
 export default function (state = initialState, action) {
-    if (action.type == "GET_CARDS") {
+    if (action.type == "CARDS_LOADING") {
         return {
             ...state,
+            isLoaded: false
+        }
+    }
+    else if (action.type == "GET_CARDS") {
+        return {
+            ...state,
+            isLoaded: true,
             cards: action.payload
         };
 
