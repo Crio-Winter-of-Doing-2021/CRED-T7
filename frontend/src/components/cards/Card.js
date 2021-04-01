@@ -7,7 +7,7 @@ import { pay } from '../../actions/pay';
 export class Card extends Component {
 
     state= {
-        amount: ''
+        pay_amount: ''
     }
 
     static propTypes = {
@@ -16,7 +16,7 @@ export class Card extends Component {
         card: PropTypes.object,
         transactions: PropTypes.object,
         viewTransactions: PropTypes.func.isRequired,
-        pay: PropTypes.func
+        pay: PropTypes.func.isRequired,
     }
 
     componentDidMount() {
@@ -35,11 +35,12 @@ export class Card extends Component {
         [e.target.name]: [e.target.value]
     });
 
-    onClick = e => {
-        // console.log(this.props.match.params.id);
-        console.log("Onclick Here");
-        console.log(this.state);
-        this.props.pay(this.props.card.id,this.state.amount);
+    onSubmit = e => {
+        e.preventDefault();
+        let temp_JSON=null;
+        const { pay_amount } = this.state;
+        temp_JSON={"pay_amount":this.state.pay_amount[0]};
+        this.props.pay(this.props.card.id,temp_JSON);
     };
 
     componentWillUnmount() {
@@ -48,9 +49,10 @@ export class Card extends Component {
 
     render() {
         let card = null
-        let pay = null
+        let pay_button = null
         let trans = null
-        const { amount } = this.state;
+        const { pay_amount } = this.state;
+        const formSubmitted = this.state.formSubmitted;
         if (this.props.card) {
             // console.log("Credit", this.props.card.credit)
             // console.log("lol");
@@ -94,16 +96,23 @@ export class Card extends Component {
                 </div>
             </form>
             if (this.props.card.credit > 0.00) {
-                pay = <button type="button" className="py-2 px-4  bg-black hover:bg-indigo-900
-            text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md 
-           focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full" onClick={this.onClick} >
-                    Pay Bill
-             
-       </button>
+                pay_button= <form onSubmit={this.onSubmit} className="bg-white mt-6  shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container w-auto" >
+                    <div className="row py-3">
+                        <div className="form-group col-md-19">
+                            
+                            <input value={pay_amount} type="text" onChange={this.onChange}
+                                name="pay_amount" 
+                                className="form-control" id="formGroupExampleInput4" placeholder="Enter amount" />
+                        </div>
+                    </div>
+                    <div className="d-flex justify-content-center">
+                        <button type="submit" className="btn btn-primary">PAY</button>
+                    </div>
+                </form>
 
             }
             else {
-                pay = <button type="button" title="No cards added yet." disabled=" " className="btn bg-green-600 cursor-not-allowed">
+                pay_button = <button type="button" title="No cards added yet." disabled=" " className="btn bg-green-600 cursor-not-allowed">
                     <p className="card-text text-light">No pending bills to pay. Chill out!</p>
                 </button>
             }
@@ -197,7 +206,7 @@ export class Card extends Component {
                     {card}
                 </div>
                 <div className="flex justify-center">
-                    {pay}
+                    {pay_button}
                 </div>
                 <div className="flex justify-center">
                     {trans}

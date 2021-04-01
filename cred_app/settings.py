@@ -112,10 +112,10 @@ WSGI_APPLICATION = 'cred_app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
+        'NAME': 'dfra804ce98bhn',
         'USER': env('user_val'),
         'PASSWORD': env('pass_val'),
-        'HOST': 'localhost',
+        'HOST': 'ec2-54-167-168-52.compute-1.amazonaws.com',
         'PORT': 5432,
     }
 }
