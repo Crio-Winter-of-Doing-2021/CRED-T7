@@ -21,7 +21,9 @@ export class Form extends Component {
     'Tata Capital', 'UCO Bank', 'Union Bank of India', 'Vijaya Bank', 'YES Bank']
 
     static propTypes = {
-        addCard: PropTypes.func.isRequired
+        addCard: PropTypes.func.isRequired,
+        error: PropTypes.object,
+        message: PropTypes.object,
     }
 
     onChange = e => this.setState({
@@ -38,8 +40,6 @@ export class Form extends Component {
         )
     }
 
-    
-
     onSubmit = e => {
         e.preventDefault();
         console.log(this.state)
@@ -51,6 +51,10 @@ export class Form extends Component {
         }
         card = { "card_number": card_number[0], "owner_name": owner_name[0], "bank": bank, "cvv": cvv[0], expiry_date_month, expiry_date_year };
         this.props.addCard(card);
+        console.log(!this.props.error.msg && this.props.message && this.props.message.addCard);
+        if(!this.props.error.msg && this.props.message && this.props.message.addCard){
+            window.location.href = `#/cards`
+        }
     };
 
     render() {
@@ -113,5 +117,10 @@ export class Form extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    error: state.errors,
+    message: state.messages
+})
 
 export default connect(null, { addCard })(Form);

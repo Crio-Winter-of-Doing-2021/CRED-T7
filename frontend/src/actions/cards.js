@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { ADD_CARD, GET_CARDS, CARDS_LOADING } from './types';
+import {returnErrors,createMessage} from './messages';
 
 export const getCards = (page) => (dispatch, getState) => {
     dispatch({
@@ -24,7 +25,7 @@ export const getCards = (page) => (dispatch, getState) => {
                     type: GET_CARDS,
                     payload: response.data
                 })
-            }).catch(err => console.log(err))
+            }).catch(err => dispatch(returnErrors(err.response.data,err.response.status)))
     }
     else {
         alert("You are not logged in!");
@@ -47,18 +48,13 @@ export const addCard = (card) => (dispatch, getState) => {
         axios.post('/cards', card, config)
             .then(response => {
                 // console.log(response.data)
+                dispatch(createMessage({addCard:"Card Added"}))
                 dispatch({
                     type: ADD_CARD,
                     payload: response.data
                 })
-            }).catch(err => {
-                // console.log(err.response.data)
-                let message = "";
-                for (const key in err.response.data) {
-                    message += "\n" + `${key} : ${err.response.data[key]}`;
-                }
-                alert(message);
-            }
+            }).catch(err => 
+                dispatch(returnErrors(err.response.data,err.response.status))
             );
     }
     else {

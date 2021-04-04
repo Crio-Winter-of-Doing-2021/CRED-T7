@@ -18,6 +18,7 @@ export class Cards extends Component {
     componentDidMount() {
         this.props.getCards(this.state.page);
         // console.log(this.state)
+        this.props.history.push(`/cards`);
     }
 
     componentDidUpdate(prevProps, prevState) {

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import ReactDom from 'react-dom';
 import Header from './layout/Header';
+import Alerts from './layout/Alerts';
 import Footer from './layout/Footer';
 import NotFound404 from './common/NotFound404';
 import Dashboard from './cards/Dashboard';
@@ -18,6 +19,16 @@ import { loadUser } from '../actions/auth';
 import "../style/main.css";
 import favicon from "./images/favicon.ico"
 
+import { Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
+
+//Alert options
+const alertOptions = {
+  position: 'bottom center',
+  timeout: 5000,
+  offset: '3px',
+}
+
 class App extends Component {
     componentDidMount() {
         // console.log("mounted");
@@ -26,9 +37,14 @@ class App extends Component {
     render() {
         return (
             <Provider store={store}>
+                <AlertProvider template={AlertTemplate}
+                {...alertOptions}>
                 <Router>
                     <Fragment>
                         <Header />
+                        <div>
+                            <Alerts /> 
+                        </div>
                         <Switch>
                             <PrivateRoute exact path="/" component={Dashboard} />
                             <Route exact path="/register" component={Register} />
@@ -42,7 +58,7 @@ class App extends Component {
                         {/* <Footer /> */}
                     </Fragment>
                 </Router>
-
+                </AlertProvider>
             </Provider>
         )
     }

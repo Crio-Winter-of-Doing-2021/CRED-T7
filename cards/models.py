@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from datetime import datetime
+from datetime import datetime,date
 from django.core.validators import MinValueValidator
 
 banks = (('SBI', 'SBI'), ('HDFC', 'HDFC'), ('Standard Chartered Bank', 'Standard Chartered Bank'), ('YES Bank', 'YES Bank'), ('Citibank', 'Citibank'), ('ICICI Bank', 'ICICI Bank'),
@@ -26,6 +26,8 @@ class Cards(models.Model):
     credit = models.DecimalField(
         max_digits=19, decimal_places=2, auto_created=True, default=0.00,
         validators=[MinValueValidator(0.00)])
+    lastPayDate = models.DateField(auto_now_add=date.today)
+
 
 
 class Transactions(models.Model):

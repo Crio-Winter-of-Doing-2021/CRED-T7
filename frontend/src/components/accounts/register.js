@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { register } from '../../actions/auth';
 import { connect } from "react-redux";
+import {createMessage} from '../../actions/messages';
 
 export class Register extends Component {
     state = {
@@ -26,16 +27,22 @@ export class Register extends Component {
     onSubmit = e => {
         e.preventDefault();
         const { username, password1, password2, email } = this.state
-        // console.log(password1, password2)
-        if (password2[0] !== password1[0]) {
-            alert("Passwords do not match. Try Again!");
+        console.log(password1, password2)
+        if(email==''){
+            // console.log("true")
+            createMessage({emailNotEntered:"Email field can't be left blank."})
+        }
+        if(password1=='' || password2==''){
+            createMessage({passwordNotEntered:"Password field can't be left blank."})
+        }
+        if (password2 !== password1) {
+            createMessage({passwordsDoNotMatch:" Passwords do not match. Try Again."})
         }
         else {
             const password = password1;
             const newUser = { username, password, email };
             console.log(newUser);
             this.props.register(newUser);
-
         }
     };
 

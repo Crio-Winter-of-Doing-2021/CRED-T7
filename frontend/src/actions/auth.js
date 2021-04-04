@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { USER_LOADING, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL } from './types';
+import {returnErrors} from "./messages";
 
 export const loadUser = () => (dispatch, getState) => {
     dispatch({
@@ -27,7 +28,8 @@ export const loadUser = () => (dispatch, getState) => {
                 payload: response.data
             });
         }).catch(error => {
-            console.log(error);
+            // console.log(error);
+            dispatch(returnErrors(error.response.data,error.response.status))
             dispatch({
                 type: AUTH_ERROR
             });
@@ -51,9 +53,10 @@ export const login = (username, password) => (dispatch) => {
                 payload: response.data
             });
         }).catch(error => {
-            alert(error);
+            // alert(error);
+            dispatch(returnErrors(error.response.data,error.response.status))
             dispatch({
-                type: LOGIN_FAIL
+                type: LOGIN_FAIL,
             });
         })
 }
@@ -67,6 +70,7 @@ export const register = ({ username, password, email }) => (dispatch) => {
     };
 
     const body = { "username": username[0], "password": password[0], "email": email[0] };
+    // console.log(body)
 
     axios.post('/signup', body, config)
         .then(response => {
@@ -75,9 +79,10 @@ export const register = ({ username, password, email }) => (dispatch) => {
                 payload: response.data
             });
         }).catch(error => {
-            alert(error);
+            console.log(error);
+            dispatch(returnErrors(error.response.data,error.response.status))
             dispatch({
-                type: REGISTER_FAIL
+                type: REGISTER_FAIL,
             });
         })
 }
@@ -103,7 +108,8 @@ export const logout = () => (dispatch, getState) => {
                 type: LOGOUT_SUCCESS,
             });
         }).catch(error => {
-            console.log(error);
+            // console.log(error);
+            dispatch(returnErrors(error.response.data,error.response.status))
             dispatch({
                 type: AUTH_ERROR
             });
