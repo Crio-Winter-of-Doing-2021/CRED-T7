@@ -1,12 +1,12 @@
 from rest_framework import generics, permissions, serializers
 from rest_framework.response import Response
-from .serializers import CardSerializer, TransactionSerializer, payCardSerializer
+from .serializers import CardSerializer, TransactionSerializer, payCardSerializer, SmartSerializer
 from .models import Cards, Transactions
 from rest_framework.views import APIView
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from rest_framework.pagination import PageNumberPagination
-
+from django.db.models import Sum,Count
 
 class IsOwnerOrNot(permissions.BasePermission):
 
@@ -132,3 +132,13 @@ def checkBillPayments():
             )
             msg.content_subtype = "html"
             msg.send()
+
+class smartstatements(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated, TransactionIsOwnerOrNot]
+    serializer_class = SmartSerializer
+    def get_queryset(self):
+        card = get_object_or_404(self.request.user.cards, pk=self.kwargs['pk'])
+        limit=min(10,len(card.transactions.all()))
+        queryset=card.transactions.values('vendor').annotate(total=Count('pk'),total_amount=Sum('amount')).order_by('-total_amount')[:limit]
+        return queryset
+
