@@ -109,17 +109,27 @@ WSGI_APPLICATION = 'cred_app.wsgi.application'
 # }
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'dfra804ce98bhn',
+#         'USER': env('user_val'),
+#         'PASSWORD': env('pass_val'),
+#         'HOST': 'ec2-54-167-168-52.compute-1.amazonaws.com',
+#         'PORT': 5432,
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dfra804ce98bhn',
+        'NAME': 'postgres',
         'USER': env('user_val'),
         'PASSWORD': env('pass_val'),
-        'HOST': 'ec2-54-167-168-52.compute-1.amazonaws.com',
+        'HOST': 'localhost',
         'PORT': 5432,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -158,3 +168,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Twilio SendGrid
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = env('SENDGRID_API_KEY')

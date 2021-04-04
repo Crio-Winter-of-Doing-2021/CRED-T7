@@ -11,7 +11,7 @@ from rest_framework.pagination import PageNumberPagination
 class IsOwnerOrNot(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
-        print(obj.owner, request.user)
+        # print(obj.owner, request.user)
         return obj.owner == request.user
 
 
@@ -74,7 +74,7 @@ class addTransaction(generics.ListCreateAPIView):
         transaction = serializer.save(owner=card)
         card.credit += serializer.validated_data['amount']
         card.save()
-        print(card.credit, serializer.validated_data['amount'])
+        # print(card.credit, serializer.validated_data['amount'])
         return Response({
             'transaction': TransactionSerializer(transaction, context=self.get_serializer_context()).data,
         })
@@ -91,7 +91,7 @@ class viewTransaction(generics.ListAPIView):
 
     def get_queryset(self):
         card = get_object_or_404(self.request.user.cards, pk=self.kwargs['pk'])
-        print(card.transactions.all())
+        # print(card.transactions.all())
         return card.transactions.all()
 
 
@@ -103,7 +103,7 @@ class payCard(generics.CreateAPIView):
         card = get_object_or_404(request.user.cards.all(), pk=kwargs['pk'])
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        print(request.data)
+        # print(request.data)
         if(serializer.validated_data['pay_amount'] > card.credit):
             raise serializers.ValidationError(
                 'The payment should be less than or equal to what is to be paid.')
@@ -111,3 +111,24 @@ class payCard(generics.CreateAPIView):
         card.credit -= serializer.validated_data['pay_amount']
         card.save()
         return Response({'Payment Billed': serializer.validated_data['pay_amount']})
+
+def checkBillPayments():
+    users = (User.objects.all())
+    for user in users:
+        cards = Cards.objects.filter(owner=user.pk)
+        valid_cards= cards.filter(credit__gte="0.01",lastPayDate__lte=datetime.now()-timedelta(minutes=10))
+        # print(valid_cards)
+        if(valid_cards):
+            subject = f'The cards bills are still pending!'
+            from_send="shantanusingh1069@gmail.com"
+            to_send=user.email
+            context={"name":user.username,"valid_cards":valid_cards}
+            message = get_template('html-message.html').render(context)
+            msg = EmailMessage(
+                subject,
+                message,
+                from_send,
+                [to_send],
+            )
+            msg.content_subtype = "html"
+            msg.send()

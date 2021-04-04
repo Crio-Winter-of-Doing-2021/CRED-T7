@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { createMessage, returnErrors } from './messages';
 
 import { PAY } from './types';
 
@@ -15,15 +16,15 @@ export const pay = (id,pay_amount) => (dispatch, getState) => {
         
         axios.post(`/cards/${id}/pay`, pay_amount, config)
             .then(response => {
-                console.log(response);
+                dispatch(createMessage({'payed':`Bill Payed for ₹${pay_amount.pay_amount}`}))
                 dispatch({
                     type: PAY,
                     payload: response.data
                 })
-            }).catch(err => console.log(err))
+            }).catch(err => dispatch(returnErrors(err.response.data,err.response.status)))
     }
     else {
-        alert("Enter amount");
+        alert("You're not logged in!");
     }
 }
 

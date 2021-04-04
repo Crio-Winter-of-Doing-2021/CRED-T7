@@ -4,10 +4,14 @@ import { connect } from "react-redux";
 import { getCard, clearCardData, viewTransactions } from '../../actions/card';
 import { Link } from "react-router-dom";
 import { pay } from '../../actions/pay';
+import { withRouter } from 'react-router'; 
+import {createMessage} from '../../actions/messages';
+
 export class Card extends Component {
 
     state= {
-        pay_amount: ''
+        pay_amount: '',
+        page: 1
     }
 
     static propTypes = {
@@ -24,7 +28,7 @@ export class Card extends Component {
             // console.log(this.props.match.params.id)
             const id = this.props.match.params.id;
             this.props.getCard(id);
-            this.props.viewTransactions(id);
+            this.props.viewTransactions(id,this.state.page);
         }
         else {
             alert("Error Occured");
@@ -38,10 +42,27 @@ export class Card extends Component {
     onSubmit = e => {
         e.preventDefault();
         let temp_JSON=null;
-        const { pay_amount } = this.state;
-        temp_JSON={"pay_amount":this.state.pay_amount[0]};
-        this.props.pay(this.props.card.id,temp_JSON);
+        const { pay_amount,page } = this.state;
+        console.log(this.state.pay_amount)
+        if(!this.state.pay_amount[0] || this.state.pay_amount[0]=='0' || pay_amount>this.props.card.credit){
+            console.log("true")
+            alert("Invalid value entered to pay! Try Again")
+        }
+        else{
+            temp_JSON={"pay_amount":this.state.pay_amount[0]};
+            this.props.pay(this.props.card.id,temp_JSON);
+            // window.location.href = `#/cards/${this.props.card.id}`
+            // location.reload();
+        }
     };
+
+    componentDidUpdate(prevProps, prevState) {
+        // console.log(this.state.page, prevState.page)
+        if (this.state.page !== prevState.page) {
+            const id = this.props.match.params.id;
+            this.props.viewTransactions(id,this.state.page);
+        }
+    }
 
     componentWillUnmount() {
         this.props.clearCardData();
@@ -125,7 +146,7 @@ export class Card extends Component {
         }
 
         if (this.props.transactions && this.props.transactions.results.length > 0) {
-            console.log(this.props.transactions.results.length)
+            // console.log(this.props.transactions.results.length)
             trans = <div>
                 <div className="flex justify-center">
                     <div className="py-8">
@@ -183,7 +204,7 @@ export class Card extends Component {
                 <div className="flex justify-center">
                     <button disabled={this.props.transactions.results && this.props.transactions.previous == null} onClick={(state) => this.setState({ ...state, page: this.state.page - 1 })} className={`flex items-center p-3 mx-1 transition ease-in 
                     duration-200 uppercase  border-2 
-                    border-gray-900 focus:outline-none ${this.props.transactions.previous ? "hover:bg-gray-800 hover:text-white" : "cursor-not-allowed "}`} onClick={this.onClick}>
+                    border-gray-900 focus:outline-none ${this.props.transactions.previous ? "hover:bg-gray-800 hover:text-white" : "cursor-not-allowed "}`}>
                         Prev
                         </button>
                     <button disabled={this.props.transactions.results && this.props.transactions.next == null} onClick={(state) => this.setState({ ...state, page: this.state.page + 1 })} className={`flex items-center p-3 mx-1 transition ease-in 
@@ -221,4 +242,4 @@ const mapStateToProps = state => ({
     transactions: state.card.transactions
 })
 
-export default connect(mapStateToProps, { getCard, clearCardData, viewTransactions, pay })(Card)
+export default connect(mapStateToProps, { getCard, clearCardData, viewTransactions, pay })(withRouter(Card))
