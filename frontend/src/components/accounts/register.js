@@ -27,21 +27,24 @@ export class Register extends Component {
     onSubmit = e => {
         e.preventDefault();
         const { username, password1, password2, email } = this.state
-        console.log(password1, password2)
+        // console.log(password1, password2)
         if(email==''){
             // console.log("true")
             createMessage({emailNotEntered:"Email field can't be left blank."})
         }
-        if(password1=='' || password2==''){
+        if(password1[0]=='' || password2[0]==''){
+            // console.log("true")
             createMessage({passwordNotEntered:"Password field can't be left blank."})
         }
-        if (password2 !== password1) {
+        if (password2[0] !== password1[0]) {
+            // console.log(password2,password1)
             createMessage({passwordsDoNotMatch:" Passwords do not match. Try Again."})
         }
         else {
+            // console.log("true")
             const password = password1;
             const newUser = { username, password, email };
-            console.log(newUser);
+            // console.log(newUser);
             this.props.register(newUser);
         }
     };

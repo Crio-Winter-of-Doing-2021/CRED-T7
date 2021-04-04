@@ -1,4 +1,4 @@
-import { GET_CARD, CLEAR_CARD, GET_TRANSACTION } from "./types";
+import { GET_CARD, CLEAR_CARD, GET_TRANSACTION , GET_SMARTSTATEMENTS} from "./types";
 import axios from "axios";
 import {createMessage,returnErrors} from "./messages";
 
@@ -52,6 +52,31 @@ export const viewTransactions = (id,page) => (dispatch, getState) => {
                     payload: response.data
                 })
             }).catch(err => dispatch(returnErrors(err.response.data,err.response.status)))
+    }
+    else {
+        alert("You are not logged in!");
+    }
+}
+
+export const viewSmartStatements = (id) => (dispatch, getState) => {
+    const token = getState().auth.token
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    if (token) {
+        config.headers['Authorization'] = `Token ${token}`;
+
+        axios.get(`/cards/${id}/smartstatements`, config)
+            .then(response => {
+                dispatch({
+                    type: GET_SMARTSTATEMENTS,
+                    payload: response.data
+                })
+            }).catch(err => alert(err))
     }
     else {
         alert("You are not logged in!");

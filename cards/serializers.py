@@ -122,3 +122,8 @@ class TransactionSerializer(serializers.ModelSerializer):
 class payCardSerializer(serializers.Serializer):
     pay_amount = serializers.DecimalField(max_digits=19, decimal_places=2, validators=[
         MinValueValidator(float('0.01'))])
+
+class SmartSerializer(serializers.Serializer):
+    vendor = serializers.CharField(max_length=200)
+    total = serializers.IntegerField()
+    total_amount = serializers.DecimalField(max_digits=19, decimal_places=2)

@@ -54,6 +54,7 @@ class App extends Component {
                             <PrivateRoute exact path="/cards/:id" component={Card} />
                             <PrivateRoute exact path="/cards/:id/pay" component={Card} />
                             <Route exact path="*" component={NotFound404} />
+                            <PrivateRoute exact path="/cards/:id/smartstatements" component={Card} />
                         </Switch>
                         {/* <Footer /> */}
                     </Fragment>
