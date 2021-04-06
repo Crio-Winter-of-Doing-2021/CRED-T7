@@ -34,11 +34,10 @@ export class Cards extends Component {
             return (
                 <div>
                     <h3 className=" text-center pt-5 font-bold text-2xl">Cards</h3>
-                    <div className="flex justify-center">
+                    <div className="">
                         <div className="py-8">
-                            <div className="">
-                                <div className="inline-block min-w-full shadow rounded-lg overflow-x-scroll">
-                                    <table className="container font-normal">
+                                <div className="shadow rounded-sm table-responsive-sm">
+                                    <table className="table container font-normal">
                                         <thead>
                                             <tr>
                                                 <th scope="col" className="px-5 py-3 text-center  bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
@@ -50,9 +49,9 @@ export class Cards extends Component {
                                                 <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
                                                     Expiry
                         </th>
-                                                {/*<th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
+                                                {/* <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
                                                     Outstanding Balance
-                        </th>*/}
+                        </th> */}
                                                 <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
                                                 </th>
                                             </tr>
@@ -70,7 +69,9 @@ export class Cards extends Component {
                                                         <p>{`${card.expiry_date_month}/${card.expiry_date_year}`}
                                                         </p>
                                                     </td>
-                                                    
+                                                    {/* <td className="px-5 py-5 text-center border-b border-gray-200 bg-white text-sm">
+                                                        <p>₹ {card.credit}
+                                                        </p></td> */}
                                                     <td className="border-b text-center border-gray-200">
                                                         <Link to={`/cards/${card.id}`}>
                                                             <a className="btn btn-info btn-sm mx-3">View Statement</a>
@@ -80,7 +81,6 @@ export class Cards extends Component {
                                             ))}
                                         </tbody>
                                     </table>
-                                </div>
                             </div>
                         </div>
                     </div>

@@ -43,9 +43,10 @@ export class Dashboard extends Component {
                 <div className="text-center">
                     <p className="font-semibold h2 mt-10">Welcome Home, {this.props.username}! </p>
                 </div>
+                <div className="flex justify-center items-center">
                 <div className="flex justify-center items-center mt-6 ">
-                    <div className="sm:flex justify-center items-center text-center gap-14">
-                        <div className="w-1/2 h-56 px-4 py-4 bg-white mt-6 hover:bg-indigo-900
+                    <div className="flex justify-center items-center text-center gap-14">
+                        <div className="w-1/2 min-h-56 px-4 py-4 bg-white mt-6 hover:bg-indigo-900
              transition ease-in duration-200  shadow-lg rounded-lg dark:bg-gray-800">
                             <h5 className="card-title font-semibold">Add a Card</h5>
                             <p className="card-text">Want to add a Card? Click Below</p>
@@ -54,7 +55,7 @@ export class Dashboard extends Component {
                                 <button className="btn btn-primary mt-6">
                                     <p className="card-text text-light">Add Card</p></button></Link>
                         </div>
-                        <div className="min-w-4 w-1/2 h-56 hover:bg-indigo-900
+                        <div className="min-w-4 w-1/2 min-h-56 hover:bg-indigo-900
              transition ease-in duration-200 px-4 py-4 bg-white mt-6  shadow-lg rounded-lg dark:bg-gray-800">
                             <h5 className="card-title font-semibold">View Your Cards</h5>
                             <p className="card-text">Want to view your cards and manage their statements? Click Below</p>
@@ -63,7 +64,7 @@ export class Dashboard extends Component {
                         </div>
                     </div>
                 </div>
-
+                </div>
             </Fragment>
         )
     }

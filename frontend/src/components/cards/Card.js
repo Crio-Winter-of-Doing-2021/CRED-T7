@@ -46,9 +46,9 @@ export class Card extends Component {
         e.preventDefault();
         let temp_JSON=null;
         const { pay_amount,page } = this.state;
-        console.log(this.state.pay_amount)
+        // console.log(this.state.pay_amount)
         if(!this.state.pay_amount[0] || this.state.pay_amount[0]=='0' || parseFloat(pay_amount)>parseFloat(this.props.card.credit)){
-            console.log("true")
+            // console.log("true")
             alert("Invalid value entered to pay! Try Again")
         }
         else{
@@ -153,14 +153,13 @@ render() {
 
 
         if (this.props.transactions && this.props.transactions.results.length > 0) {
-            console.log(this.props.transactions.results.length)
-            trans = <div>
-                <div className="flex justify-center">
-                    <div className="py-8">
-                        <div className="">
-                            <div className="inline-block min-w-full shadow rounded-lg ">
-                                <table className="container font-normal">
-                                    <thead>
+            // console.log(this.props.transactions.results.length)
+            trans =
+                <div className="">
+                        <div className="py-8">
+                                <div className="shadow rounded-sm table-responsive-sm">
+                                    <table className="table container font-normal">
+                                        <thead>
                                         <tr>
                                             <th scope="col" className="px-5 py-3 text-center  bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
                                                 Vendor
@@ -204,10 +203,8 @@ render() {
                                         ))}
                                     </tbody>
                                 </table>
-                            </div>
                         </div>
                     </div>
-                </div>
                 <div className="flex justify-center">
                     <button disabled={this.props.transactions.results && this.props.transactions.previous == null} onClick={(state) => this.setState({ ...state, page: this.state.page - 1 })} className={`flex items-center p-3 mx-1 transition ease-in 
                     duration-200 uppercase  border-2 
@@ -230,14 +227,12 @@ render() {
 
 
         if (this.props.smartstatements && this.props.smartstatements.results.length > 0) {
-            console.log(this.props.smartstatements.results.length)
-            smartstates = <div>
-                <div className="flex justify-center">
-                    <div className="py-8">
-                        <div className="">
-                            <div className="inline-block min-w-full shadow rounded-lg ">
-                                <table className="table-striped container font-normal">
-                                    <thead>
+            // console.log(this.props.smartstatements.results.length)
+            smartstates = <div className="">
+            <div className="py-8">
+                    <div className="shadow rounded-sm table-responsive-sm">
+                        <table className="table container font-normal">
+                            <thead>
                                         <tr>
                                             <th scope="col" className="px-5 py-3 text-center  bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
                                                 Vendor
@@ -253,7 +248,7 @@ render() {
                                     </thead>
                                     <tbody>
                                         {this.props.smartstatements.results.map(transac => (
-                                            <tr key={transac.id}  >
+                                            <tr key={transac.vendor}  >
                                                 <td className="px-5 py-3 text-center border-b border-gray-200  text-sm">
                                                     <p>{transac.vendor} 
                                                     </p></td>
@@ -267,15 +262,13 @@ render() {
                                         ))}
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
-                    </div>
+                                </div>
                 </div>
                 
             </div>
         }
         else {
-            console.log(this.props.smartstatements)
+            // console.log(this.props.smartstatements)
             smartstates = <div className="bg-black text-white mt-6 w-1/2 shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container">
                 No Smart Statements to show for this card.
             </div>
@@ -288,10 +281,10 @@ render() {
                 <div className="flex justify-center">
                     {pay_button}
                 </div>
-                <div className="flex justify-center">
+                <div className="">
                     {trans}
                 </div>
-                <div className="flex justify-center">
+                <div className="">
                     {smartstates}
                 </div>
             </div>
