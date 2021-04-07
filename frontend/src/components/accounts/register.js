@@ -51,7 +51,7 @@ export class Register extends Component {
 
     render() {
         if (this.props.isAuthenticated) {
-            return <Redirect to="/" />
+            return <Redirect to="/dashboard" />
         }
         const { username, email, password1, password2 } = this.state
 
@@ -80,7 +80,7 @@ export class Register extends Component {
                         </div>
                         <button type="submit" className="btn btn-primary">Register</button>
                         <p className="mt-4 text-lg">
-                            Already have an account? <Link to="/login">Login Here</Link>
+                            Already have an account? <Link replace to="/login">Login Here</Link>
                         </p>
                     </form>
                 </div>

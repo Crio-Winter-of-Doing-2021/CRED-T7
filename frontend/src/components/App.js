@@ -5,6 +5,7 @@ import Alerts from './layout/Alerts';
 import Footer from './layout/Footer';
 import NotFound404 from './common/NotFound404';
 import Dashboard from './cards/Dashboard';
+import Home from './common/Home';
 import Favicon from 'react-favicon';
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './accounts/login';
@@ -42,11 +43,10 @@ class App extends Component {
                 <Router>
                     <Fragment>
                         <Header />
-                        <div>
                             <Alerts /> 
-                        </div>
                         <Switch>
-                            <PrivateRoute exact path="/" component={Dashboard} />
+                            <Route exact path="/" component={Home} />
+                            <PrivateRoute exact path="/dashboard" component={Dashboard} />
                             <Route exact path="/register" component={Register} />
                             <Route exact path="/login" component={Login} />
                             <PrivateRoute exact path="/addcard" component={Form} />

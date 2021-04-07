@@ -73,7 +73,7 @@ export class Cards extends Component {
                                                         <p>₹ {card.credit}
                                                         </p></td> */}
                                                     <td className="border-b text-center border-gray-200">
-                                                        <Link to={`/cards/${card.id}`}>
+                                                        <Link to={`/cards/${card.id}`} replace>
                                                             <a className="btn btn-info btn-sm mx-3">View Statement</a>
                                                         </Link>
                                                     </td>

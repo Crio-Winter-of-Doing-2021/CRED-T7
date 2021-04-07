@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'accounts',
     'knox',
     'frontend',
+    'rest_framework_swagger',
+    'drf_yasg'
 ]
 
 REST_FRAMEWORK = {'DEFAULT_AUTHENTICATION_CLASSES': (
