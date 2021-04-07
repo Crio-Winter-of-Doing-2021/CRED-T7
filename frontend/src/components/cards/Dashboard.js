@@ -25,7 +25,7 @@ export class Dashboard extends Component {
         // console.log(this.props.cards)
         if (this.props.cards.count > 0 && this.props.cards.results.length > 0) {
             ifcards =
-                <Link to="/cards"> <button href="" className="btn btn-primary mt-2">
+                <Link to="/cards" replace> <button href="" className="btn btn-primary mt-2">
                     <p className="card-text text-light">View Cards</p>
                 </button></Link>
         }
@@ -51,7 +51,7 @@ export class Dashboard extends Component {
                             <h5 className="card-title font-semibold">Add a Card</h5>
                             <p className="card-text">Want to add a Card? Click Below</p>
 
-                            <Link to="/addcard">
+                            <Link to="/addcard" replace>
                                 <button className="btn btn-primary mt-6">
                                     <p className="card-text text-light">Add Card</p></button></Link>
                         </div>

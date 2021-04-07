@@ -31,7 +31,7 @@ export class Login extends Component {
     render() {
         const { username, password } = this.state
         if (this.props.isAuthenticated) {
-            return <Redirect to="/" />
+            return <Redirect to="/dashboard" />
         }
         return (
             <div className="col-md-10 m-auto">

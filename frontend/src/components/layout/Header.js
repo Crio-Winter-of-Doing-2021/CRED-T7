@@ -18,23 +18,23 @@ export class Header extends Component {
         if (this.props.cards.count > 0) {
             viewcards = <li className="nav-item m-1">
                 <a className={`nav-link btn`} >
-                    <Link className="text-light" style={{ textDecoration: "none" }} to="/cards">View Cards </Link></a>
+                    <Link className="text-light" style={{ textDecoration: "none" }} to="/cards" replace>View Cards </Link></a>
             </li>
         }
         else {
             viewcards = <li className="nav-item m-1">
                 <a className={`nav-link btn disabled`} >
-                    <Link className="text-light" style={{ textDecoration: "none" }} to="/cards">View Cards </Link></a>
+                    <Link className="text-light" style={{ textDecoration: "none" }} to="/cards" replace>View Cards </Link></a>
             </li>
         }
         const authLinks = (
             <ul className="navbar-nav pl-4">
                 <li className="nav-item m-1">
-                    <a className="nav-link btn text-light" aria-current="page" href="">Home</a>
+                    <a className="nav-link btn text-light" aria-current="page" href="/#/dashboard">Dashboard</a>
                 </li>
                 <li className="nav-item m-1">
                     <a className="nav-link btn">
-                        <Link className="text-light" style={{ textDecoration: "none" }} to="/addcard"> Add Card</Link></a>
+                        <Link className="text-light" style={{ textDecoration: "none" }} to="/addcard" replace> Add Card</Link></a>
                 </li>
                 {viewcards}
                 <li className="nav-item m-1">
@@ -46,22 +46,22 @@ export class Header extends Component {
         const guestLinks = (
             <ul className="navbar-nav pl-4">
                 <li className="nav-item m-1">
-                    <Link to="/register" className="nav-link" href="">Register</Link>
+                    <Link to="/register" className="nav-link text-light" href="" replace>Register</Link>
                 </li>
                 <li className="nav-item m-1">
-                    <Link to="/login" className="nav-link" href="">Login</Link>
+                    <Link to="/login" className="nav-link text-light" href="" replace>Login</Link>
                 </li>
             </ul>
         )
         return (
             <nav style={{ margin: "0" }} className="navbar sticky-top navbar-expand-sm navbar-dark bg-black">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="">
+                    <Link to="/" className="navbar-brand" replace>
                         <span>
                             <img className="img-fluid mr-1 d-inline-block align-center " width="50" src={favicon}></img>
                             CRED
                         </span>
-                    </a>
+                    </Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>

@@ -145,7 +145,7 @@ render() {
 
         }
         else {
-            card = <div className="bg-black text-gray-100 mt-6 w-1/2 shadow-lg rounded-lg  p-4 m-5 container">No card to show here. <Link to="/cards" className="hover:bg-white">Go Back</Link>
+            card = <div className="bg-black text-gray-100 mt-6 w-1/2 shadow-lg rounded-lg  p-4 m-5 container">No card to show here. <Link to="/cards" className="hover:bg-white" replace>Go Back</Link>
             </div>
         }
 
@@ -155,7 +155,7 @@ render() {
         if (this.props.transactions && this.props.transactions.results.length > 0) {
             // console.log(this.props.transactions.results.length)
             trans =
-                <div className="">
+                <div className="container">
                         <div className="py-8">
                                 <div className="shadow rounded-sm table-responsive-sm">
                                     <table className="table container font-normal">
@@ -208,7 +208,7 @@ render() {
                 <div className="flex justify-center">
                     <button disabled={this.props.transactions.results && this.props.transactions.previous == null} onClick={(state) => this.setState({ ...state, page: this.state.page - 1 })} className={`flex items-center p-3 mx-1 transition ease-in 
                     duration-200 uppercase  border-2 
-                    border-gray-900 focus:outline-none ${this.props.transactions.previous ? "hover:bg-gray-800 hover:text-white" : "cursor-not-allowed "}`} onClick={this.onClick}>
+                    border-gray-900 focus:outline-none ${this.props.transactions.previous ? "hover:bg-gray-800 hover:text-white" : "cursor-not-allowed "}`}>
                         Prev
                         </button>
                     <button disabled={this.props.transactions.results && this.props.transactions.next == null} onClick={(state) => this.setState({ ...state, page: this.state.page + 1 })} className={`flex items-center p-3 mx-1 transition ease-in 
@@ -281,10 +281,10 @@ render() {
                 <div className="flex justify-center">
                     {pay_button}
                 </div>
-                <div className="">
+                <div className="container">
                     {trans}
                 </div>
-                <div className="">
+                <div className="container">
                     {smartstates}
                 </div>
             </div>
