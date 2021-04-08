@@ -7,6 +7,13 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404
 from rest_framework.pagination import PageNumberPagination
 from django.db.models import Sum,Count
+import threading,time
+from datetime import datetime,timedelta
+from celery import shared_task 
+from django.contrib.auth.models import User
+from django.template.loader import render_to_string, get_template
+from django.core.mail import EmailMessage,send_mail
+
 
 class IsOwnerOrNot(permissions.BasePermission):
 
@@ -112,6 +119,7 @@ class payCard(generics.CreateAPIView):
         card.save()
         return Response({'Payment Billed': serializer.validated_data['pay_amount']})
 
+@shared_task
 def checkBillPayments():
     users = (User.objects.all())
     for user in users:
@@ -132,6 +140,9 @@ def checkBillPayments():
             )
             msg.content_subtype = "html"
             msg.send()
+            print(msg)
+
+# WAIT_TIME_SECONDS = 60
 
 class smartstatements(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated, TransactionIsOwnerOrNot]
