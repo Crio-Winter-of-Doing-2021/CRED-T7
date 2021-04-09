@@ -88,7 +88,9 @@ class addTransaction(generics.ListCreateAPIView):
 
     def get_queryset(self):
         card = get_object_or_404(self.request.user.cards, pk=self.kwargs['pk'])
-        return card.transactions.all()
+        if(len(self.kwargs['month'])<2):
+            self.kwargs['month']= '0'+self.kwargs['month']
+        return card.transactions.filter(year=str(self.kwargs['year']),month=str(self.kwargs['month']))
 
 
 class viewTransaction(generics.ListAPIView):

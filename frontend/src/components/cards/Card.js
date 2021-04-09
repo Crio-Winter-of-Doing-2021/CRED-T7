@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from "react-redux";
-import { getCard, clearCardData, viewTransactions, viewSmartStatements } from '../../actions/card';
+import { getCard, clearCardData, viewTransactions, viewSmartStatements, viewStatements } from '../../actions/card';
 import { Link } from "react-router-dom";
 import { pay } from '../../actions/pay';
-import { withRouter } from 'react-router'; 
-import {createMessage} from '../../actions/messages';
+import { withRouter } from 'react-router';
+import { createMessage } from '../../actions/messages';
 
 export class Card extends Component {
 
-    state= {
+    state = {
         pay_amount: '',
-        page: 1
+        page: 1,
+        year: null,
+        month: null
     }
+    months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+    years = ['2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012']
 
     static propTypes = {
         getCard: PropTypes.func.isRequired,
@@ -23,6 +27,7 @@ export class Card extends Component {
         pay: PropTypes.func.isRequired,
         viewSmartStatements: PropTypes.func.isRequired,
         smartstatements: PropTypes.object,
+        viewStatements: PropTypes.func.isRequired
     }
 
     componentDidMount() {
@@ -30,7 +35,7 @@ export class Card extends Component {
             // console.log(this.props.match.params.id)
             const id = this.props.match.params.id;
             this.props.getCard(id);
-            this.props.viewTransactions(id,this.state.page);
+            this.props.viewTransactions(id, this.state.page);
             this.props.viewSmartStatements(id);
         }
         else {
@@ -44,19 +49,15 @@ export class Card extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        let temp_JSON=null;
-        const { pay_amount,page } = this.state;
-        // console.log(this.state.pay_amount)
-        if(!this.state.pay_amount[0] || this.state.pay_amount[0]=='0' || parseFloat(pay_amount)>parseFloat(this.props.card.credit)){
-            // console.log("true")
+        let temp_JSON = null;
+        const { pay_amount, page } = this.state;
+        if (!this.state.pay_amount[0] || this.state.pay_amount[0] == '0' || parseFloat(pay_amount) > parseFloat(this.props.card.credit)) {
             alert("Invalid value entered to pay! Try Again")
         }
-        else{
-            temp_JSON={"pay_amount":this.state.pay_amount[0]};
-            this.props.pay(this.props.card.id,temp_JSON);
+        else {
+            temp_JSON = { "pay_amount": this.state.pay_amount[0] };
+            this.props.pay(this.props.card.id, temp_JSON);
             window.location.href = '#/cards/'
-            // window.location.href = `#/cards/${this.props.card.id}`
-            // location.reload();
         }
     };
 
@@ -64,24 +65,64 @@ export class Card extends Component {
         // console.log(this.state.page, prevState.page)
         if (this.state.page !== prevState.page) {
             const id = this.props.match.params.id;
-            this.props.viewTransactions(id,this.state.page);
+            this.props.viewTransactions(id, this.state.page);
         }
+        else if (this.state.month && this.state.year) {
+            const id = this.props.match.params.id;
+            // if (prevState.month === null || prevState.year === null) {
+            //     this.props.viewStatements(id, this.state.month, this.state.year, this.state.page);
+            // }
+            if (this.state.month != prevState.month || this.state.year != prevState.year) {
+                this.props.viewStatements(id, this.state.month, this.state.year, this.state.page);
+            }
+        }
+        else if (!this.state.month && !this.state.year && (prevState.month || prevState.year)) {
+            const id = this.props.match.params.id;
+            this.props.viewTransactions(id, this.state.page);
+        }
+    }
+
+    changeMonth(month, e) {
+        e.preventDefault();
+        this.setState(
+            {
+                ...this.state,
+                month: month
+            }
+        )
+    }
+
+    changeYear(year, e) {
+        e.preventDefault();
+        this.setState(
+            {
+                ...this.state,
+                year: year
+            }
+        )
+    }
+
+    clearFilters(e) {
+        e.preventDefault();
+        this.setState({
+            ...this.state,
+            year: null,
+            month: null,
+            page: 1
+        })
     }
 
     componentWillUnmount() {
         this.props.clearCardData();
     }
 
-render() { 
+    render() {
         let card = null
         let pay_button = null
         let trans = null
-        let smartstates=null
+        let smartstates = null
         const { pay_amount } = this.state;
-        const formSubmitted = this.state.formSubmitted;
         if (this.props.card) {
-            // console.log("Credit", this.props.card.credit)
-            // console.log("lol");
             card = <form onSubmit={this.onSubmit} className="bg-white mt-6 w-1/2 shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container" >
                 <p className="h3 pb-3">Your Card</p>
                 <div className="row py-1">
@@ -122,17 +163,27 @@ render() {
                 </div>
             </form>
             if (this.props.card.credit > 0.00) {
-                pay_button= <form onSubmit={this.onSubmit} className="bg-white mt-6  shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container w-auto" >
+                pay_button = <form onSubmit={this.onSubmit} className="shadow-lg rounded-xl bg-blue-900 md:w-64 p-6 dark:bg-gray-800 relative overflow-hiddencontainer w-auto" >
+                    <p className="text-white text-2xl font-semibold">
+                        Pay Now!
+                    </p>
                     <div className="row py-3">
-                        <div className="form-group col-md-19">
-                            
-                            <input value={pay_amount} type="text" onChange={this.onChange}
-                                name="pay_amount" 
-                                className="form-control" id="formGroupExampleInput4" placeholder="Enter amount" />
+                        <div>
+                            <div className="mt-1 relative rounded-md shadow-sm">
+                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <span className="text-black sm:text-sm">
+                                        ₹
+                                    </span>
+                                </div>
+                                <input value={pay_amount} type="text" onChange={this.onChange}
+                                    name="pay_amount" id="formGroupExampleInput4" className="focus:ring-indigo-500 text-black form-control border-l border-b border-t border-gray-300 py-2 px-4 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm rounded-md" placeholder="0.00" />
+                            </div>
                         </div>
                     </div>
                     <div className="d-flex justify-content-center">
-                        <button type="submit" className="btn btn-primary">PAY</button>
+                        <button type="submit" className="py-2 px-4  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                            PAY
+                            </button>
                     </div>
                 </form>
 
@@ -148,130 +199,122 @@ render() {
             card = <div className="bg-black text-gray-100 mt-6 w-1/2 shadow-lg rounded-lg  p-4 m-5 container">No card to show here. <Link to="/cards" className="hover:bg-white" replace>Go Back</Link>
             </div>
         }
-
-        
-
-
         if (this.props.transactions && this.props.transactions.results.length > 0) {
             // console.log(this.props.transactions.results.length)
             trans =
-                <div className="container">
-                        <div className="py-8">
-                                <div className="shadow rounded-sm table-responsive-sm">
-                                    <table className="table container font-normal">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col" className="px-5 py-3 text-center  bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
-                                                Vendor
+                <div>
+                    <div className="shadow rounded-sm table-responsive-sm">
+                        <table className="table container font-normal">
+                            <thead>
+                                <tr>
+                                    <th scope="col" className="px-5 py-3 text-center  bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
+                                        Vendor
                                              </th>
-                                            <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
-                                                Type
+                                    <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
+                                        Type
                                             </th>
-                                            <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
-                                                Category
+                                    <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
+                                        Category
                                             </th>
-                                            <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
-                                                Date
+                                    <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
+                                        Date
                                              </th>
-                                            <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
-                                                Amount
+                                    <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
+                                        Amount
                                             </th>
-                                            <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {this.props.transactions.results.map(transac => (
-                                            <tr key={transac.id}>
-                                                <td className="px-5  text-center border-b border-gray-200 bg-white text-sm">
-                                                    <p>{transac.vendor}
-                                                    </p></td>
-                                                <td className="px-5  text-center border-b border-gray-200 bg-white text-sm">
-                                                    <p>{transac.CreditorDebit}
-                                                    </p></td>
-                                                <td className="px-5  text-center border-b border-gray-200 bg-white text-sm">
-                                                    <p>{transac.category}
-                                                    </p></td>
-                                                <td className="px-5 text-center border-b border-gray-200 bg-white text-sm">
-                                                    <p>{`${transac.month}/${transac.year}`}
-                                                    </p>
-                                                </td>
-                                                <td className="px-5  text-center border-b border-gray-200 bg-white text-sm">
-                                                    <p>₹ {transac.amount}
-                                                    </p></td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                        </div>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.props.transactions.results.map(transac => (
+                                    <tr key={transac.id}>
+                                        <td className="px-5  text-center border-b border-gray-200 bg-white text-sm">
+                                            <p>{transac.vendor}
+                                            </p></td>
+                                        <td className="px-5  text-center border-b border-gray-200 bg-white text-sm">
+                                            <p>{transac.CreditorDebit}
+                                            </p></td>
+                                        <td className="px-5  text-center border-b border-gray-200 bg-white text-sm">
+                                            <p>{transac.category}
+                                            </p></td>
+                                        <td className="px-5 text-center border-b border-gray-200 bg-white text-sm">
+                                            <p>{`${transac.month}/${transac.year}`}
+                                            </p>
+                                        </td>
+                                        <td className="px-5  text-center border-b border-gray-200 bg-white text-sm">
+                                            <p>₹ {transac.amount}
+                                            </p></td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
-                <div className="flex justify-center">
-                    <button disabled={this.props.transactions.results && this.props.transactions.previous == null} onClick={(state) => this.setState({ ...state, page: this.state.page - 1 })} className={`flex items-center p-3 mx-1 transition ease-in 
+                    <div className="flex justify-center mt-2">
+                        <button disabled={this.props.transactions.results && this.props.transactions.previous == null} onClick={(state) => this.setState({ ...state, page: this.state.page - 1 })} className={`flex items-center p-2 mx-1 transition ease-in 
                     duration-200 uppercase  border-2 
                     border-gray-900 focus:outline-none ${this.props.transactions.previous ? "hover:bg-gray-800 hover:text-white" : "cursor-not-allowed "}`}>
-                        Prev
+                            Prev
                         </button>
-                    <button disabled={this.props.transactions.results && this.props.transactions.next == null} onClick={(state) => this.setState({ ...state, page: this.state.page + 1 })} className={`flex items-center p-3 mx-1 transition ease-in 
+                        <button disabled={this.props.transactions.results && this.props.transactions.next == null} onClick={(state) => this.setState({ ...state, page: this.state.page + 1 })} className={`flex items-center p-2 mx-3 transition ease-in 
                     duration-200 uppercase   border-2 
                     border-gray-900 focus:outline-none ${this.props.transactions.next ? "hover:bg-gray-800 hover:text-white" : "cursor-not-allowed "}`}>
-                        Next
+                            Next
                         </button>
+                    </div>
                 </div>
-            </div>
         }
         else {
-            trans = <div className="bg-black text-white mt-6 w-1/2 shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container">
-                No transactions to show for this card.
+            trans = <div className="container flex justify-center">
+                <div className="bg-black text-white mt-6 w-1/2 shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container">
+                    No transactions to show for this card.
+            </div>
             </div>
         }
-
 
         if (this.props.smartstatements && this.props.smartstatements.results.length > 0) {
             // console.log(this.props.smartstatements.results.length)
             smartstates = <div className="">
-            <div className="py-8">
+                <div className="w-2/3 container my-5 uppercase text-center text-2xl font-semibold font-display text-black dark:text-white sm:text-3xl pb-3">
+                    Top vendors for card
                     <div className="shadow rounded-sm table-responsive-sm">
                         <table className="table container font-normal">
                             <thead>
-                                        <tr>
-                                            <th scope="col" className="px-5 py-3 text-center  bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
-                                                Vendor
+                                <tr>
+                                    <th scope="col" className="px-5 py-3 text-center  bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
+                                        Vendor
                                              </th>
-                                            <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
-                                                Total Transactions
+                                    <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
+                                        Total Transactions
                                             </th>
-                                            <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
-                                                Total Amount
+                                    <th scope="col" className="px-5 py-3 text-center bg-black  border-b border-gray-200 text-green-000  text-gray-200 text-sm uppercase font-normal">
+                                        Total Amount
                                             </th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {this.props.smartstatements.results.map(transac => (
-                                            <tr key={transac.vendor}  >
-                                                <td className="px-5 py-3 text-center border-b border-gray-200  text-sm">
-                                                    <p>{transac.vendor} 
-                                                    </p></td>
-                                                <td className="px-5 py-3 text-center border-b border-gray-200  text-sm">
-                                                    <p>{transac.total}
-                                                    </p></td>
-                                                <td className="px-5 py-3 text-center border-b border-gray-200  text-sm">
-                                                    <p>₹ {transac.total_amount}
-                                                    </p></td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                                </div>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.props.smartstatements.results.map(transac => (
+                                    <tr key={transac.vendor}  >
+                                        <td className="px-5 py-3 text-center border-b border-gray-200  text-sm">
+                                            <p>{transac.vendor}
+                                            </p></td>
+                                        <td className="px-5 py-3 text-center border-b border-gray-200  text-sm">
+                                            <p>{transac.total}
+                                            </p></td>
+                                        <td className="px-5 py-3 text-center border-b border-gray-200  text-sm">
+                                            <p>₹ {transac.total_amount}
+                                            </p></td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                
+
             </div>
         }
         else {
             // console.log(this.props.smartstatements)
-            smartstates = <div className="bg-black text-white mt-6 w-1/2 shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container">
-                No Smart Statements to show for this card.
-            </div>
+            smartstates = null
         }
         return (
             <div>
@@ -281,8 +324,45 @@ render() {
                 <div className="flex justify-center">
                     {pay_button}
                 </div>
-                <div className="container">
-                    {trans}
+                <div className="flex justify-center">
+                    <div className="container">
+                        <div className="pt-8">
+                            <div className="d-flex justify-content-center justify-center pt-5 pb-2">
+                                <div className="flex justify-center">
+                                    <div className="btn-group px-3">
+                                        <button type="button" id="month_button" className="btn bg-black btn-primary font-white dropdown-toggle rounded-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {this.state.month || 'Select Month'}
+                                        </button>
+                                        <div className="dropdown-menu overflow-scroll h-52">
+                                            {this.months.map(month => (
+                                                <a key={month} className="dropdown-item" value={month} onChange={this.onChange} onClick={(e) => this.changeMonth(month, e)}
+                                                >{month}</a>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div className="btn-group px-3">
+                                        <button type="button" id="year_button" className="btn bg-black btn-primary font-white dropdown-toggle rounded-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {this.state.year || 'Select Year'}
+                                        </button>
+                                        <div className="dropdown-menu overflow-scroll h-52">
+                                            {this.years.map(year => (
+                                                <a key={year} className="dropdown-item" onChange={this.onChange} value={year} onClick={(e) => this.changeYear(year, e)}
+                                                >{year}</a>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex justify-center pb-5">
+                                <div className="items-center">
+                                    <button type="button" className="btn btn-primary bg-red-600 hover:bg-red-700 focus:ring-red-500 rounded-lg text-white w-full transition ease-in duration-200 font-semibold shadow-md " onClick={(e) => this.clearFilters(e)}>
+                                        Clear Filters
+                                    </button>
+                                </div>
+                            </div>
+                            {trans}
+                        </div>
+                    </div>
                 </div>
                 <div className="container">
                     {smartstates}
@@ -295,7 +375,7 @@ const mapStateToProps = state => ({
     card: state.card.card,
     transactions: state.card.transactions,
     smartstatements: state.card.smartstatements
-    
+
 })
 
-export default connect(mapStateToProps, { getCard, clearCardData, viewTransactions, pay, viewSmartStatements })(withRouter(Card))
+export default connect(mapStateToProps, { getCard, clearCardData, viewTransactions, pay, viewSmartStatements, viewStatements })(withRouter(Card))
