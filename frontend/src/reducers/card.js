@@ -2,7 +2,7 @@
 const initialState = {
     card: null,
     transactions: null,
-    smartstatements:null
+    smartstatements: null
 }
 
 export default function (state = initialState, action) {
@@ -21,7 +21,7 @@ export default function (state = initialState, action) {
             transactions: null
         }
     }
-    else if (action.type == "GET_TRANSACTION") {
+    else if (action.type == "GET_TRANSACTION" || action.type == "GET_STATEMENT") {
         // console.log(action.payload)
         return {
             ...state,

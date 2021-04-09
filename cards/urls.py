@@ -4,7 +4,7 @@ from .api import addCard, addTransaction, viewTransaction, viewCard, payCard, sm
 urlpatterns = [
     path('cards', addCard.as_view(), name="cards"),
     path('cards/<int:pk>', viewCard.as_view(), name="viewcards"),
-    path('cards/<int:pk>/statements/<int:year>/<int:month>',
+    path('cards/<int:pk>/statements/<str:month>/<str:year>',
          addTransaction.as_view(), name="transactions"),
     path('cards/<int:pk>/statements',
          viewTransaction.as_view(), name="view_transactions"),

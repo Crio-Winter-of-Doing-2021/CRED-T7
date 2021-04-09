@@ -33,11 +33,6 @@ export class Header extends Component {
                     <a className="nav-link btn text-light" aria-current="page" href="/#/dashboard">Dashboard</a>
                 </li>
                 <li className="nav-item m-1">
-                    <a className="nav-link btn">
-                        <Link className="text-light" style={{ textDecoration: "none" }} to="/addcard" replace> Add Card</Link></a>
-                </li>
-                {viewcards}
-                <li className="nav-item m-1">
                     <a onClick={this.props.logout} className="nav-link btn text-light" >Logout</a>
                 </li>
             </ul>
