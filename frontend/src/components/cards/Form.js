@@ -13,12 +13,22 @@ export class Form extends Component {
         expiry: '',
     }
 
-    banks = ['Allahabad Bank', 'American Express', 'Andhra Bank', 'Axis Bank', 
-    'Bajaj Finserv', 'Bank of Baroda', 'Bank of India', 'Bank of Maharashtra', 'Canara Bank', 
-    'Central Bank of India', 'Citibank', 'DCB Bank', 'Federal Bank', 'HDFC', 'HSBC Bank', 'ICICI Bank',
-     'IDBI Bank', 'Indian Bank', 'IndusInd Bank', 'Kotak Mahindra Bank', 
-     'Nainital Bank', 'Punjab National Bank', 'RBL Bank', 'SBI', 'Standard Chartered Bank', 
-    'Tata Capital', 'UCO Bank', 'Union Bank of India', 'Vijaya Bank', 'YES Bank']
+    handleInputFocus = (e) => {
+        this.setState({ focus: e.target.name });
+    }
+
+    handleInputChange = (e) => {
+        const { name, value } = e.target;
+
+        this.setState({ [name]: value });
+    }
+
+    banks = ['Allahabad Bank', 'American Express', 'Andhra Bank', 'Axis Bank',
+        'Bajaj Finserv', 'Bank of Baroda', 'Bank of India', 'Bank of Maharashtra', 'Canara Bank',
+        'Central Bank of India', 'Citibank', 'DCB Bank', 'Federal Bank', 'HDFC', 'HSBC Bank', 'ICICI Bank',
+        'IDBI Bank', 'Indian Bank', 'IndusInd Bank', 'Kotak Mahindra Bank',
+        'Nainital Bank', 'Punjab National Bank', 'RBL Bank', 'SBI', 'Standard Chartered Bank',
+        'Tata Capital', 'UCO Bank', 'Union Bank of India', 'Vijaya Bank', 'YES Bank']
 
     static propTypes = {
         addCard: PropTypes.func.isRequired,
@@ -30,12 +40,12 @@ export class Form extends Component {
         [e.target.name]: [e.target.value]
     });
 
-    changeBank = (bank,e) =>{
+    changeBank = (bank, e) => {
         e.preventDefault();
         this.setState(
             {
                 ...this.state,
-                bank:bank.bank
+                bank: bank.bank
             }
         )
     }
@@ -52,7 +62,7 @@ export class Form extends Component {
         card = { "card_number": card_number[0], "owner_name": owner_name[0], "bank": bank, "cvv": cvv[0], expiry_date_month, expiry_date_year };
         this.props.addCard(card);
         console.log(!this.props.error.msg && this.props.message && this.props.message.addCard);
-        if(!this.props.error.msg && this.props.message && this.props.message.addCard){
+        if (!this.props.error.msg && this.props.message && this.props.message.addCard) {
             window.location.href = `#/cards`
         }
     };
@@ -61,20 +71,20 @@ export class Form extends Component {
         const { card_number, owner_name, banks, cvv, expiry } = this.state;
         // console.log(this.state.bank)
         const dropdown = <div className="btn-group">
-        <button type="button" id="bank_button" className="btn btn-primary font-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {this.state.bank||'Select Bank'}
-        </button>
-        <div className="dropdown-menu overflow-scroll h-52">
-            {/* <a className="dropdown-item" onClick= {(e) => this.changeBank(e)}>Not mentioned</a>
+            <button type="button" id="bank_button" className="btn btn-primary font-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {this.state.bank || 'Select Bank'}
+            </button>
+            <div className="dropdown-menu overflow-scroll h-52">
+                {/* <a className="dropdown-item" onClick= {(e) => this.changeBank(e)}>Not mentioned</a>
             <div className="dropdown-divider">
             </div> */}
-          {this.banks.map(bank =>(
-                <a key={bank} className="dropdown-item" value={bank} onChange={this.onChange}
-                 onClick= {(e) => this.changeBank({bank},e)}>{bank}</a>
-            ))}
+                {this.banks.map(bank => (
+                    <a key={bank} className="dropdown-item" value={bank} onChange={this.onChange}
+                        onClick={(e) => this.changeBank({ bank }, e)}>{bank}</a>
+                ))}
+            </div>
+
         </div>
-            
-      </div>
 
         return (
             <div className="flex justify-center w-auto">
@@ -104,10 +114,10 @@ export class Form extends Component {
                         <div className="form-group col-md-6">
                             <label className="font-medium" htmlFor="formGroupExampleInput2">Bank Name</label>
                             <div className="">
-                        {dropdown}
+                                {dropdown}
+                            </div>
                         </div>
-                        </div>
-                        
+
                     </div>
                     <div className="d-flex justify-content-center">
                         <button type="submit" className="btn btn-primary">Submit</button>

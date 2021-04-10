@@ -2,13 +2,16 @@ import React, { Component, Fragment } from 'react';
 import { withAlert } from 'react-alert';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {clearErrors,clearMessages} from '../../actions/messages';
+import { logout } from "../../actions/auth";
+import { clearErrors, clearMessages } from '../../actions/messages';
 import { ERROR_CLEAR } from '../../actions/types';
 
 export class Alerts extends Component {
     static propTypes = {
         error: PropTypes.object.isRequired,
         message: PropTypes.object.isRequired,
+        logout: PropTypes.func.isRequired,
+        auth: PropTypes.object.isRequired,
     }
     componentDidUpdate(prevProps) {
         const { error, alert, message } = this.props;
@@ -41,9 +44,10 @@ export class Alerts extends Component {
             if (error.msg.non_field_errors) {
                 alert.error(error.msg.non_field_errors.join(' '))
             }
-            // if (error.msg.detail) {
-            //     alert.error(error.msg.detail.join(" Refresh the page and retry."))
-            // }
+            if (error.msg.detail && this.props.auth.isAuthenticated) {
+                alert.error((" You have been logged out, login again."))
+                this.props.logout();
+            }
         }
         // console.log(message)
         if (message !== prevProps.message) {
@@ -67,6 +71,7 @@ export class Alerts extends Component {
 }
 const mapStateToProps = state => ({
     error: state.errors,
+    auth: state.auth,
     message: state.messages
 })
-export default connect(mapStateToProps)(withAlert()(Alerts));
+export default connect(mapStateToProps, { logout })(withAlert()(Alerts));
