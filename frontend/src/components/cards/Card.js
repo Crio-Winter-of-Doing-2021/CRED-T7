@@ -311,7 +311,7 @@ export class Card extends Component {
             }
             // console.log(pie_data, this.props.labels, this.props.total_data);
             smartstates = <div className="">
-                <div className="w-full container my-5 uppercase text-center text-2xl font-semibold font-display text-black dark:text-white sm:text-3xl">
+                <div className="w-full flex-col justify-center container my-5 uppercase text-center text-2xl font-semibold font-display text-black dark:text-white sm:text-3xl">
                     Top vendors for card
                     <div className="shadow rounded-sm table-responsive-sm pt-3">
                         <table className="table container font-normal">
@@ -346,7 +346,7 @@ export class Card extends Component {
                             </tbody>
                         </table>
                     </div>
-                    <div className="my-5 flex max-w-xl justify-center">
+                    <div className="py-5 flex justify-center overflow-scroll">
                         <Doughnut
                             data={pie_data}
                             options={{

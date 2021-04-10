@@ -50,7 +50,7 @@ export class Login extends Component {
                         </div>
                         <button type="submit" className="btn btn-primary">Login</button>
                         <p className="mt-4 text-lg">
-                            Don't have an account? <Link to="/register">Register Here</Link>
+                            Don't have an account? <Link to="/register" replace>Register Here</Link>
                         </p>
                     </form>
                 </div>
