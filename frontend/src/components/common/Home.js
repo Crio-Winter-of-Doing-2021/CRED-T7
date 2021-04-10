@@ -43,7 +43,7 @@ export class Home extends Component {
                                 Almost every other bank that offers credit card in our country. Some of them include:
         </p>
                         </div>
-                        <div className="mb-5">
+                        <div className="pb-5">
                             <div className="row">
                                 <img src={`//logo.clearbit.com/hdfcbank.com?size=80`} className="rounded-sm mb-2 mr-2 img-fluid" />
                                 <img src={`//logo.clearbit.com/hsbc.com?size=80`} className="rounded-sm mb-2 mr-2 img-fluid" />

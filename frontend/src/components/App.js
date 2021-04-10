@@ -9,6 +9,7 @@ import Home from './common/Home';
 import Favicon from 'react-favicon';
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './accounts/login';
+import Logout from './accounts/login';
 import Register from './accounts/register';
 import Form from './cards/Form';
 import Cards from './cards/Cards';
@@ -25,9 +26,9 @@ import AlertTemplate from 'react-alert-template-basic';
 
 //Alert options
 const alertOptions = {
-  position: 'bottom center',
-  timeout: 5000,
-  offset: '3px',
+    position: 'bottom center',
+    timeout: 5000,
+    offset: '3px',
 }
 
 class App extends Component {
@@ -39,26 +40,27 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <AlertProvider template={AlertTemplate}
-                {...alertOptions}>
-                <Router>
-                    <Fragment>
-                        <Header />
-                            <Alerts /> 
-                        <Switch>
-                            <Route exact path="/" component={Home} />
-                            <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                            <Route exact path="/register" component={Register} />
-                            <Route exact path="/login" component={Login} />
-                            <PrivateRoute exact path="/addcard" component={Form} />
-                            <PrivateRoute exact path="/cards" component={Cards} />
-                            <PrivateRoute exact path="/cards/:id" component={Card} />
-                            <PrivateRoute exact path="/cards/:id/pay" component={Card} />
-                            <Route exact path="*" component={NotFound404} />
-                            <PrivateRoute exact path="/cards/:id/smartstatements" component={Card} />
-                        </Switch>
-                        {/* <Footer /> */}
-                    </Fragment>
-                </Router>
+                    {...alertOptions}>
+                    <Router>
+                        <Fragment>
+                            <Header />
+                            <Alerts />
+                            <Switch>
+                                <Route exact path="/" component={Home} />
+                                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                                <Route exact path="/register" component={Register} />
+                                <Route exact path="/login" component={Login} />
+                                <PrivateRoute exact path="/logout" component={Logout} />
+                                <PrivateRoute exact path="/addcard" component={Form} />
+                                <PrivateRoute exact path="/cards" component={Cards} />
+                                <PrivateRoute exact path="/cards/:id" component={Card} />
+                                <PrivateRoute exact path="/cards/:id/pay" component={Card} />
+                                <Route exact path="*" component={NotFound404} />
+                                <PrivateRoute exact path="/cards/:id/smartstatements" component={Card} />
+                            </Switch>
+                            {/* <Footer /> */}
+                        </Fragment>
+                    </Router>
                 </AlertProvider>
             </Provider>
         )
