@@ -31,9 +31,18 @@ export default function (state = initialState, action) {
     }
     else if (action.type == "GET_SMARTSTATEMENTS") {
         // console.log(action.payload)
+        let labels = [];
+        let total_data = [];
+        action.payload.results.map(transac => {
+            labels.push(transac.vendor);
+            total_data.push(parseFloat(transac.total_amount));
+        })
+        // console.log(labels, total_data);
         return {
             ...state,
-            smartstatements: action.payload
+            smartstatements: action.payload,
+            labels: labels,
+            total_data: total_data
         };
 
     }

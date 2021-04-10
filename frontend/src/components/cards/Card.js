@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { pay } from '../../actions/pay';
 import { withRouter } from 'react-router';
 import { createMessage } from '../../actions/messages';
+import { Doughnut } from 'react-chartjs-2';
 
 export class Card extends Component {
 
@@ -27,7 +28,9 @@ export class Card extends Component {
         pay: PropTypes.func.isRequired,
         viewSmartStatements: PropTypes.func.isRequired,
         smartstatements: PropTypes.object,
-        viewStatements: PropTypes.func.isRequired
+        viewStatements: PropTypes.func.isRequired,
+        labels: PropTypes.array,
+        total_data: PropTypes.array
     }
 
     componentDidMount() {
@@ -272,10 +275,45 @@ export class Card extends Component {
 
         if (this.props.smartstatements && this.props.smartstatements.results.length > 0) {
             // console.log(this.props.smartstatements.results.length)
+            let pie_data = {
+                labels: this.props.labels,
+                datasets: [
+                    {
+                        label: 'Vendors',
+                        backgroundColor: [
+                            '#B21F00',
+                            '#C9DE00',
+                            '#2FDE00',
+                            '#00A6B4',
+                            '#6800B4',
+                            '#3f51b5',
+                            '#673ab7',
+                            '#e91e63',
+                            '#00bcd4',
+                            '#ff5722'
+
+                        ],
+                        hoverBackgroundColor: [
+                            '#501800',
+                            '#4B5000',
+                            '#175000',
+                            '#003350',
+                            '#35014F',
+                            '#1a237e',
+                            '#311b92',
+                            '#880e4f',
+                            '#006064',
+                            '#bf360c'
+                        ],
+                        data: this.props.total_data
+                    }
+                ]
+            }
+            // console.log(pie_data, this.props.labels, this.props.total_data);
             smartstates = <div className="">
-                <div className="w-2/3 container my-5 uppercase text-center text-2xl font-semibold font-display text-black dark:text-white sm:text-3xl pb-3">
+                <div className="w-full container my-5 uppercase text-center text-2xl font-semibold font-display text-black dark:text-white sm:text-3xl">
                     Top vendors for card
-                    <div className="shadow rounded-sm table-responsive-sm">
+                    <div className="shadow rounded-sm table-responsive-sm pt-3">
                         <table className="table container font-normal">
                             <thead>
                                 <tr>
@@ -307,6 +345,22 @@ export class Card extends Component {
                                 ))}
                             </tbody>
                         </table>
+                    </div>
+                    <div className="my-5 flex max-w-xl justify-center">
+                        <Doughnut
+                            data={pie_data}
+                            options={{
+                                title: {
+                                    display: true,
+                                    text: 'Pie Chart of Top Vendors by amount (₹)',
+                                    fontSize: 20
+                                },
+                                legend: {
+                                    display: true,
+                                    position: 'right'
+                                }
+                            }}
+                        />
                     </div>
                 </div>
 
@@ -364,7 +418,7 @@ export class Card extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="container">
+                <div className="container mb-10">
                     {smartstates}
                 </div>
             </div>
@@ -374,7 +428,9 @@ export class Card extends Component {
 const mapStateToProps = state => ({
     card: state.card.card,
     transactions: state.card.transactions,
-    smartstatements: state.card.smartstatements
+    smartstatements: state.card.smartstatements,
+    labels: state.card.labels,
+    total_data: state.card.total_data
 
 })
 
