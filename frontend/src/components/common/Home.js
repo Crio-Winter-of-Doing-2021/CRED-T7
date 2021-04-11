@@ -20,7 +20,7 @@ export class Home extends Component {
                                     <h1 className="font-bebas-neue text-white uppercase text-6xl sm:text-8xl font-black flex flex-col leading-none dark:text-white">
                                         CRED
                                 </h1>
-                                    <p className="text-sm sm:text-base text-gray-500 dark:text-white">
+                                    <p className="text-sm sm:text-base ext-md mt-4 font-medium text-gray-400">
                                         Management of your credit cards made much easier. View all your cards and get reminders for bill payments.
                                 </p>
                                     <div className="flex mt-8">

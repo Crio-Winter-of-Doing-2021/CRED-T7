@@ -17,15 +17,6 @@ export class Dashboard extends Component {
 
     componentDidMount() {
         this.props.getCards(1);
-        this.backListener = this.props.history.listen((location, action) => {
-            if (action === "POP") {
-                console.log("back button clicked");
-            }
-        });
-    }
-
-    componentWillUnmount() {
-        this.backListener();
     }
 
     render() {
@@ -51,8 +42,8 @@ export class Dashboard extends Component {
             <Fragment>
                 <div className="bg-white dark:bg-gray-800 ">
                     <div className="lg:flex lg:items-center lg:justify-center w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
-                        <h2 className="text-3xl font-extrabold text-black dark:text-white sm:text-4xl">
-                            Welcome Home, {this.props.username}
+                        <h2 className="text-2xl sm:text-3xl">
+                            Welcome Home, {this.props.username}.
                         </h2>
                     </div>
                 </div>

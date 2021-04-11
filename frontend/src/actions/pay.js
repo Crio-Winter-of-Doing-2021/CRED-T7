@@ -49,7 +49,7 @@ export const pay = (id, pay_amount, history) => (dispatch, getState) => {
                     type: PAY,
                     payload: response.data
                 })
-                history.push(`/cards`);
+                history.go(0);
             }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
     }
     else {
