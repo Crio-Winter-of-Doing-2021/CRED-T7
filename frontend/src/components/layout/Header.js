@@ -30,6 +30,9 @@ export class Header extends Component {
         const authLinks = (
             <ul className="navbar-nav pl-4">
                 <li className="nav-item m-1">
+                    <a className="nav-link btn text-light" aria-current="page" href="/">Home</a>
+                </li>
+                <li className="nav-item m-1">
                     <a className="nav-link btn text-light" aria-current="page" href="/#/dashboard">Dashboard</a>
                 </li>
                 <li className="nav-item m-1">
@@ -40,6 +43,9 @@ export class Header extends Component {
 
         const guestLinks = (
             <ul className="navbar-nav pl-4">
+                <li className="nav-item m-1">
+                    <Link to="/" className="nav-link text-light" href="" replace>Home</Link>
+                </li>
                 <li className="nav-item m-1">
                     <Link to="/register" className="nav-link text-light" href="" replace>Register</Link>
                 </li>

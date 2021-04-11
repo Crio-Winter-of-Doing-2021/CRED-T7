@@ -64,7 +64,7 @@ export class Cards extends Component {
                                                     </p></td>
                                                 <td className="px-5 flex justify-items-center text-center bg-white m-auto w-2/3 text-sm">
                                                     <div>
-                                                        <img className="visible-lg" width="100px" height="120px" title={card.bank} src={`//logo.clearbit.com/${card.bank_domain}`} />
+                                                        <img className="visible-lg" title={card.bank} src={`//logo.clearbit.com/${card.bank_domain}`} />
                                                         <p className=".d-none .d-sm-block text-muted text-sm .d-md-none">{card.bank}</p>
                                                     </div>
                                                 </td>
