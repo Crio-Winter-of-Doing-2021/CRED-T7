@@ -51,13 +51,6 @@ export class Form extends Component {
         card = { "card_number": card_number[0], "owner_name": owner_name[0], "bank": bank, "cvv": cvv[0], expiry_date_month, expiry_date_year };
 
         this.props.addCard(card, this.props.history);
-        if (this.props.message && this.props.message.addCard) {
-            console.log("Success");
-            // this.props.history.push('/cards');
-        }
-        else {
-            console.log("Failure");
-        }
     };
 
     render() {

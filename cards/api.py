@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.pagination import PageNumberPagination
 from django.db.models import Sum,Count
 import threading,time
-from datetime import datetime,timedelta
+from datetime import datetime,timedelta,date
 from celery import shared_task 
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string, get_template
@@ -118,6 +118,21 @@ class payCard(generics.CreateAPIView):
                 'The payment should be less than or equal to what is to be paid.')
 
         card.credit -= serializer.validated_data['pay_amount']
+        factor=1
+        
+        if (((date.today()-card.lastPayDate).days) <30) :
+            if(card.credit==0):
+                factor+=0.2
+                if (serializer.validated_data['pay_amount']>=1000) :
+                    factor+=0.2
+            else:
+                if (serializer.validated_data['pay_amount']>=1000) :
+                    factor+=0.2
+        else:
+            factor=0
+
+        card.rewards+= (float(serializer.validated_data['pay_amount']) * factor)//1
+        card.lastPayDate=date.today()
         card.save()
         return Response({'Payment Billed': serializer.validated_data['pay_amount']})
 
