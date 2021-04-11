@@ -56,6 +56,7 @@ export class Alerts extends Component {
             if (message.passwordNotEntered) alert.error(message.passwordNotEntered);
             if (message.emailNotEntered) alert.error(message.emailNotEntered);
             if (message.payed) alert.success(message.payed);
+            if (message.rewards) alert.success(message.rewards);
             if (message.noPay) alert.error(message.noPay)
         }
 

@@ -57,7 +57,7 @@ class CardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cards
         fields = ['id', 'bank', 'card_number', 'owner_name', 'cvv',
-                  'expiry_date_month', 'expiry_date_year', 'bank_domain', 'credit']
+                  'expiry_date_month', 'expiry_date_year', 'bank_domain', 'credit', 'rewards','lastPayDate']
 
     def validate_cvv(self, value):
         try:

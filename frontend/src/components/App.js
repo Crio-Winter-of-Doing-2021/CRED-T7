@@ -19,7 +19,7 @@ import store from '../store';
 import PrivateRoute from './common/PrivateRoute';
 import { loadUser } from '../actions/auth';
 import "../style/main.css";
-import favicon from "./images/favicon.ico"
+import favicon from "./images/favicon.ico";
 
 import { Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
