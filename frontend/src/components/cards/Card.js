@@ -7,6 +7,8 @@ import { pay } from '../../actions/pay';
 import { withRouter } from 'react-router';
 import { createMessage } from '../../actions/messages';
 import { Doughnut } from 'react-chartjs-2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faCreditCard } from '@fortawesome/fontawesome-free-solid'
 
 export class Card extends Component {
 
@@ -14,7 +16,8 @@ export class Card extends Component {
         pay_amount: '',
         page: 1,
         year: null,
-        month: null
+        month: null,
+        showCVV: false,
     }
     months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
     years = ['2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012']
@@ -58,9 +61,9 @@ export class Card extends Component {
             alert("Invalid value entered to pay! Try Again")
         }
         else {
-            temp_JSON = { "pay_amount": this.state.pay_amount[0],"credit": this.props.card.credit,"lastPayDate":this.props.card.lastPayDate };
-            this.props.pay(this.props.card.id, temp_JSON);
-            window.location.href = '#/cards/'
+            temp_JSON = { "pay_amount": this.state.pay_amount[0], "credit": this.props.card.credit, "lastPayDate": this.props.card.lastPayDate };
+            this.props.pay(this.props.card.id, temp_JSON, this.props.history);
+            // window.location.href = '#/cards/'
         }
     };
 
@@ -84,6 +87,11 @@ export class Card extends Component {
             this.props.viewTransactions(id, this.state.page);
         }
     }
+
+    toggleCVV = () => {
+        const { showCVV } = this.state;
+        this.setState({ showCVV: !showCVV });
+    };
 
     changeMonth(month, e) {
         e.preventDefault();
@@ -127,7 +135,7 @@ export class Card extends Component {
         const { pay_amount } = this.state;
         if (this.props.card) {
             card = <form onSubmit={this.onSubmit} className="bg-white mt-6 w-1/2 shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container" >
-                <p className="h3 pb-3">Your Card</p>
+                <p className="h3 pb-3 pr-1">Your Card <FontAwesomeIcon icon={faCreditCard} /></p>
                 <div className="row py-1">
                     <div className="form-group col-md-6">
                         <label className="h5" htmlFor="formGroupExampleInput">Credit Card Number</label>
@@ -143,9 +151,14 @@ export class Card extends Component {
                     </div>
                     <div className="form-group col-md-6">
                         <label className="h5" htmlFor="formGroupExampleInput">CVV</label>
-                        <p>
-                            {this.props.card.cvv}
-                        </p>
+                        <span className="row pl-3">
+                            <p className="pr-2">
+                                {this.state.showCVV ? this.props.card.cvv : "***"}
+                            </p>
+                            <button type="button" className="pl-3" onClick={this.toggleCVV}>
+                                <FontAwesomeIcon icon={faEye} />
+                            </button>
+                        </span>
                     </div>
                     <div className="form-group col-md-6">
                         <label className="h5" htmlFor="formGroupExampleInput">Expiry Month and Year</label>
