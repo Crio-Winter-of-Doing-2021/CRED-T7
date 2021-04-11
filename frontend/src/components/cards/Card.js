@@ -58,7 +58,7 @@ export class Card extends Component {
             alert("Invalid value entered to pay! Try Again")
         }
         else {
-            temp_JSON = { "pay_amount": this.state.pay_amount[0] };
+            temp_JSON = { "pay_amount": this.state.pay_amount[0],"credit": this.props.card.credit,"lastPayDate":this.props.card.lastPayDate };
             this.props.pay(this.props.card.id, temp_JSON);
             window.location.href = '#/cards/'
         }
