@@ -1,7 +1,7 @@
 # CRED-T7
 Team ID: CRED-T7 | Team Members: Aditya Mahajan &amp; Shantanu Singh
 
-<img src="https://keyholesoftware.com/wp-content/uploads/React-Redux.png.webp" width="310" height="250"/> <img src="https://miro.medium.com/max/700/1*MQ-Lf8tmtfa-pumN2Sh0cw.png" width="310" height="250"/> <img src="https://www.quest.com/community/cfs-filesystemfile/__key/communityserver-components-secureimagefileviewer/communityserver-blogs-components-weblogfiles-00-00-00-00-39/Slide2.JPG_2D00_1100x500x2.jpg?_=637219525519183603" width="310" height="250"/>
+<img src="https://keyholesoftware.com/wp-content/uploads/React-Redux.png.webp" width="200" height="150"/> <img src="https://miro.medium.com/max/700/1*MQ-Lf8tmtfa-pumN2Sh0cw.png" width="200" height="150"/> <img src="https://www.quest.com/community/cfs-filesystemfile/__key/communityserver-components-secureimagefileviewer/communityserver-blogs-components-weblogfiles-00-00-00-00-39/Slide2.JPG_2D00_1100x500x2.jpg?_=637219525519183603" width="200" height="150"/>
 
 
 ## Credit Card Management System
