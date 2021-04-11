@@ -97,7 +97,7 @@ export class Home extends Component {
                                 <div className="inline-block">
                                     <p className="text-md mt-4 font-medium text-gray-400 w-1/2 mb-3 float-right">
                                         Wanna look back at all the transactions you made last summer?
-                                        No worries, you won't have skip through all the transactions to reach there.
+                                        No worries, you won't have to skip through all the transactions to reach there.
                                         We got you covered.
                                 </p>
                                     <div className="py-3 pl-5">

@@ -40,7 +40,7 @@ class CardSerializer(serializers.ModelSerializer):
              'Citibank': 'citibank.co.in', 'ICICI Bank': 'icicibank.com',
              'American Express': 'americanexpress.com', 'IndusInd Bank': 'indusind.com',
              'RBL Bank': 'rblbank.com', 'Allahabad Bank': 'allahabadbank.com', 'Bajaj Finserv': 'bajajfinserv.in',
-             'Andhra Bank': 'andhrabank.in', 'Axis Bank': 'axisbank.com', 'Bank of India': 'bankofindia.com',
+             'Andhra Bank': 'andhrabank.in', 'Axis Bank': 'axisdirect.in', 'Bank of India': 'bankofindia.com',
              'Bank of Baroda': 'bobibanking.com', 'Bank of Maharashtra': 'bankofmaharashtra.in',
              'Canara Bank': 'canarabank.com', 'Central Bank of India': 'centralbankofindia.co.in', 'DCB Bank': 'dcbbank.com',
              'Federal Bank': 'federalbank.co.in', 'HSBC Bank': 'hsbc.com', 'IDBI Bank': 'idbibank.in', 'Indian Bank': 'indianbank.in',
@@ -122,6 +122,7 @@ class TransactionSerializer(serializers.ModelSerializer):
 class payCardSerializer(serializers.Serializer):
     pay_amount = serializers.DecimalField(max_digits=19, decimal_places=2, validators=[
         MinValueValidator(float('0.01'))])
+
 
 class SmartSerializer(serializers.Serializer):
     vendor = serializers.CharField(max_length=200)

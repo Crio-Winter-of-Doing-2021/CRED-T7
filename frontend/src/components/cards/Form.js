@@ -13,16 +13,6 @@ export class Form extends Component {
         expiry: '',
     }
 
-    handleInputFocus = (e) => {
-        this.setState({ focus: e.target.name });
-    }
-
-    handleInputChange = (e) => {
-        const { name, value } = e.target;
-
-        this.setState({ [name]: value });
-    }
-
     banks = ['Allahabad Bank', 'American Express', 'Andhra Bank', 'Axis Bank',
         'Bajaj Finserv', 'Bank of Baroda', 'Bank of India', 'Bank of Maharashtra', 'Canara Bank',
         'Central Bank of India', 'Citibank', 'DCB Bank', 'Federal Bank', 'HDFC', 'HSBC Bank', 'ICICI Bank',
@@ -50,9 +40,8 @@ export class Form extends Component {
         )
     }
 
-    onSubmit = e => {
+    onSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
         const { card_number, owner_name, bank, cvv, expiry } = this.state;
         let [expiry_date_year, expiry_date_month] = ['', ''];
         let card = {};
@@ -60,10 +49,14 @@ export class Form extends Component {
             [expiry_date_year, expiry_date_month] = expiry[0].split('-');
         }
         card = { "card_number": card_number[0], "owner_name": owner_name[0], "bank": bank, "cvv": cvv[0], expiry_date_month, expiry_date_year };
-        this.props.addCard(card);
-        console.log(!this.props.error.msg && this.props.message && this.props.message.addCard);
-        if (!this.props.error.msg && this.props.message && this.props.message.addCard) {
-            window.location.href = `#/cards`
+
+        this.props.addCard(card, this.props.history);
+        if (this.props.message && this.props.message.addCard) {
+            console.log("Success");
+            // this.props.history.push('/cards');
+        }
+        else {
+            console.log("Failure");
         }
     };
 
@@ -133,4 +126,4 @@ const mapStateToProps = state => ({
     message: state.messages
 })
 
-export default connect(null, { addCard })(Form);
+export default connect(null, { addCard })(withRouter(Form));

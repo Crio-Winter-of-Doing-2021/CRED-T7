@@ -45,7 +45,7 @@ export class Alerts extends Component {
                 alert.error(error.msg.non_field_errors.join(' '))
             }
             if (error.msg.detail && this.props.auth.isAuthenticated) {
-                alert.error((" You have been logged out, login again."))
+                alert.error((" You have been logged out."))
                 this.props.logout();
             }
         }
