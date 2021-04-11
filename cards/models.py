@@ -27,6 +27,7 @@ class Cards(models.Model):
         max_digits=19, decimal_places=2, auto_created=True, default=0.00,
         validators=[MinValueValidator(0.00)])
     lastPayDate = models.DateField(auto_now_add=date.today)
+    rewards = models.IntegerField(default=0)
 
 
 
