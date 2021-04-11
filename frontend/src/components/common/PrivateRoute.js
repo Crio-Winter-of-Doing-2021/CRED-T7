@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import spinner from '../images/spinner.gif';
 
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => (
@@ -10,9 +11,8 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => (
         render={props => {
             if (auth.isLoading) {
                 return <div className="flex justify-center p-5">
-                    <p className="font-extrabold text-2xl mt-24 text-black animate-bounce">
-                        Loading...Please Wait
-                    </p>
+                    <img src={spinner}>
+                    </img>
                 </div>
 
             }
