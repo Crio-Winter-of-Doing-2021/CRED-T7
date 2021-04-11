@@ -153,15 +153,22 @@ export class Card extends Component {
                             {`${this.props.card.expiry_date_month}/${this.props.card.expiry_date_year}`}
                         </p>
                     </div>
-                    <div className="form-group col-md-6">
-                        <label className="h5" htmlFor="formGroupExampleInput2">Bank</label>
-                        <img title={this.props.card.bank} src={`//logo.clearbit.com/${this.props.card.bank_domain}?size=80`} />
-                    </div>
+                    
                     <div className="form-group col-md-6">
                         <label className="h5" htmlFor="formGroupExampleInput2">Outstanding Balance</label>
                         <p className={this.props.card.credit > 0 ? `text-red-600 font-semibold` : 'text-green-600 font-semibold'}>
                             ₹{this.props.card.credit}
                         </p>
+                    </div>
+                    <div className="form-group col-md-6">
+                        <label className="h5" htmlFor="formGroupExampleInput">Coins</label>
+                        <p className={this.props.card.coins > 0 ? `text-green-600 font-semibold` : 'text-green-600 font-semibold'}>
+                            {this.props.card.rewards}
+                        </p>
+                    </div>
+                    <div className="form-group col-md-6">
+                        <label className="h5" htmlFor="formGroupExampleInput2">Bank</label>
+                        <img title={this.props.card.bank} src={`//logo.clearbit.com/${this.props.card.bank_domain}?size=80`} />
                     </div>
                 </div>
             </form>
