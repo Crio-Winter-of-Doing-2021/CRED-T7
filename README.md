@@ -59,6 +59,17 @@ npm run package.json
 python manage.py test
 ```
 
+## Starting app 
+### Backend 
+ ```
+ python manage.py runserver
+ ```
+ ### Frontend 
+ ```
+ cd frontend
+ npm run dev
+ ```
+
 ## Database schema
 <img src="https://github.com/Crio-Winter-of-Doing-2021/CRED-T7/blob/1bc2ef7562b86a4e631ee257d27c4b98f4374bf0/db_schema.PNG" alt="DBSCHEMA" align="center">
 
