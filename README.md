@@ -42,7 +42,7 @@ pip install -r requirements.txt
 Use below code to install Javascript related dependencies
 ```
 cd frontend
-npm install package.json
+npm install
 ```
 
 ## Testing
