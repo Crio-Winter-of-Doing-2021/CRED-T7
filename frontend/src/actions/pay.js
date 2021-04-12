@@ -49,7 +49,9 @@ export const pay = (id, pay_amount, history) => (dispatch, getState) => {
                     type: PAY,
                     payload: response.data
                 })
-                history.go(0);
+                setTimeout(() => {
+                    history.go(0);
+                }, 2000)
             }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
     }
     else {
