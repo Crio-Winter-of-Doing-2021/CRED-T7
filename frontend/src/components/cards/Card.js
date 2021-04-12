@@ -135,7 +135,7 @@ export class Card extends Component {
         const { pay_amount } = this.state;
         if (this.props.card) {
             card = <form onSubmit={this.onSubmit} className="bg-white mt-6 w-1/2 shadow-lg rounded-lg dark:bg-gray-800 p-4 m-5 container" >
-                <p className="h3 pb-3 pr-1">Your Card <FontAwesomeIcon icon={faCreditCard} /></p>
+                <p className="h3 pb-3">Your Card <FontAwesomeIcon icon={faCreditCard} /></p>
                 <div className="row py-1">
                     <div className="form-group col-md-6">
                         <label className="h5" htmlFor="formGroupExampleInput">Credit Card Number</label>

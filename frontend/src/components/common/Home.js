@@ -5,6 +5,8 @@ import banks from "../images/banks.jpg";
 import Footer from '../layout/Footer';
 import chart from '../images/chart_example.png';
 import transactions from '../images/transactions_sample.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoins } from '@fortawesome/fontawesome-free-solid'
 
 export class Home extends Component {
     render() {
@@ -101,8 +103,25 @@ export class Home extends Component {
                                         We got you covered.
                                 </p>
                                     <div className="py-3 pl-5">
-                                        <img src={transactions} className="rounded-2xl sm:text-center img-fluid float-left shadow-lg"></img>
+                                        <img src={transactions} className="rounded-xl py-3 sm:text-center img-fluid float-left shadow-lg"></img>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="dark:bg-gray-800 pb-5 w-3/5 flex justify-items-center container md:pl-12">
+                            <div className="w-full py-6 z-20 rounded-md container ">
+                                <h2 className="text-3xl font-extrabold text-black dark:text-white sm:text-4xl items-center">
+                                    <span className="text-white">
+                                        Rewards for You
+                                 </span>
+                                </h2>
+                                <div className="">
+                                    <p className="text-md mt-4 font-medium text-gray-400 w-1/2 mb-3">
+                                        Another reason to pay those pending bills on time. Coins for you on timely payments.
+                                        <div className="float-right py-5 w-1/3 h-auto text-8xl">
+                                            <FontAwesomeIcon icon={faCoins} color="yellow" />
+                                        </div>
+                                    </p>
                                 </div>
                             </div>
                         </div>
