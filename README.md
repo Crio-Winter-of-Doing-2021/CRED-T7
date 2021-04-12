@@ -33,15 +33,6 @@ Built a <a href="https://cred.club/">CRED</a> app Clone with the following featu
 
 ## Getting started 
 
-### Softwares Required
-
-For using this api you have to install following softwares
-1. [Python](https://www.python.org/)
-2. [VSCode](https://code.visualstudio.com/)-You can use any other editor
-3. [Postman](https://www.postman.com/)- If you do not have experience with frontend technologies you can use postman just to check whether our API is working fine or not.
-4. [Postgres](https://www.postgresql.org/)- We used Postgres Database, you can use any other Relational Database.
-5. [pgadmin](https://www.pgadmin.org/)- It is a Database Management system for postgres.
-6. [Node.js](https://nodejs.org/en/download/)- For installing React and Redux
 
 ### Libraries Required
 Use below code to install python related dependencies
@@ -51,7 +42,7 @@ pip install -r requirements.txt
 Use below code to install Javascript related dependencies
 ```
 cd frontend
-npm run package.json
+npm install package.json
 ```
 
 ## Testing
