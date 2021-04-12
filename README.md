@@ -60,9 +60,25 @@ python manage.py test
  cd frontend
  npm run dev
  ```
+ 
 
 ## Database schema
 <img src="https://github.com/Crio-Winter-of-Doing-2021/CRED-T7/blob/1bc2ef7562b86a4e631ee257d27c4b98f4374bf0/db_schema.PNG" alt="DBSCHEMA" align="center">
+
+ ## API Endpoints
+ Following are the api endpoints for this app.
+ 
+ ```
+ /login 
+ /signup
+ /cards
+ /cards/1
+ /cards/1/pay
+ /cards/1/statements
+ /cards/1/statements/04/2021
+ /cards/1/smartstatements
+ ```
+
 
 ## UI Flow
 <img src="ui_flow.PNG" alt="UIFLOW" align="center">
