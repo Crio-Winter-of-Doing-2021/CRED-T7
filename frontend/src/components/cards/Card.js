@@ -8,7 +8,7 @@ import { withRouter } from 'react-router';
 import { createMessage } from '../../actions/messages';
 import { Doughnut } from 'react-chartjs-2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faCreditCard } from '@fortawesome/fontawesome-free-solid'
+import { faEye, faCreditCard, faCoins } from '@fortawesome/fontawesome-free-solid'
 
 export class Card extends Component {
 
@@ -166,7 +166,7 @@ export class Card extends Component {
                             {`${this.props.card.expiry_date_month}/${this.props.card.expiry_date_year}`}
                         </p>
                     </div>
-                    
+
                     <div className="form-group col-md-6">
                         <label className="h5" htmlFor="formGroupExampleInput2">Outstanding Balance</label>
                         <p className={this.props.card.credit > 0 ? `text-red-600 font-semibold` : 'text-green-600 font-semibold'}>
@@ -176,7 +176,7 @@ export class Card extends Component {
                     <div className="form-group col-md-6">
                         <label className="h5" htmlFor="formGroupExampleInput">Coins</label>
                         <p className={this.props.card.coins > 0 ? `text-green-600 font-semibold` : 'text-green-600 font-semibold'}>
-                            {this.props.card.rewards}
+                            {this.props.card.rewards} <FontAwesomeIcon icon={faCoins} color="yellow" />
                         </p>
                     </div>
                     <div className="form-group col-md-6">
