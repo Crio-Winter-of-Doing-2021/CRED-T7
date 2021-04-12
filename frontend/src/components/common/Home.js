@@ -127,6 +127,37 @@ export class Home extends Component {
                         </div>
                     </div>
                 </div>
+                <div class="bg-gray-100">
+                    <div class="max-w-6xl m-auto text-gray-800 flex flex-wrap justify-center">
+                        <div class="p-5 w-48 ">
+                            <div class="text-xs uppercase text-gray-500 font-medium">Home</div>
+                            <Link class="my-3 block" to="/">Homepage <span class="text-teal-600 text-xs p-1"></span></Link>
+                            <Link class="my-3 block" to="/dashboard">Dashboard <span class="text-teal-600 text-xs p-1"></span></Link>
+                            <Link class="my-3 block" to="/addcard">Add a Card<span class="text-teal-600 text-xs p-1"></span></Link>
+                            <Link class="my-3 block" to="/cards">View Cards<span class="text-teal-600 text-xs p-1"></span></Link>
+                        </div>
+                        <div class="p-5 w-48 ">
+                            <div class="text-xs uppercase text-gray-500 font-medium">Project</div>
+                            <a class="my-3 block" href="//www.github.com/Crio-Winter-of-Doing-2021/CRED-T7">Repository to Project <span class="text-teal-600 text-xs p-1"></span></a>
+                            <a class="my-3 block" href="/swagger">Swagger Docs <span class="text-teal-600 text-xs p-1"></span></a>
+                        </div>
+                        <div class="p-5 w-48 ">
+                            <div class="text-xs uppercase text-gray-500 font-medium">About us</div>
+                            <p class="my-3 block font-medium">Cred T-7</p>
+                            <ul>
+                                <li><p class="my-3 block">Aditya Mahajan (aditya.m.1997@gmail.com)</p></li>
+                                <li><p class="my-3 block">Shantanu Singh (shantanusingh1069@gmail.com)</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-100 pt-2 ">
+                    <div class="flex pb-5 px-3 m-auto pt-1 border-t text-gray-800 text-sm flex-col
+      md:flex-row max-w-6xl">
+                        <div class="mt-2">© Copyright 2021. All Rights Reserved.</div>
+                    </div>
+                </div>
             </body>
         )
     }
