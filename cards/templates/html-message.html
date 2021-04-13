@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <h2 class="">
+        Hey there {{ name }}. A friendly reminder of the credit card bills that need to be paid.
+    </h2>
+    <div>
+        <table style="border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        min-width: 400px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);">
+            <thead style=" background-color: #009879;
+            color: #ffffff;
+            text-align: center;">
+                <tr style=" background-color: #009879;
+                color: #ffffff;
+                text-align: center;">
+                    <th style="padding: 12px 15px;">Credit Card Number</th>
+                    <th style="padding: 12px 15px;">Bank</th>
+                    <th style="padding: 12px 15px;">Outstanding Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for card in valid_cards %}
+                <tr style="border-bottom: 1px solid #dddddd;">
+                    <td style="padding: 12px 15px; text-align: center;">{{card.card_number}}</td>
+                    <td style="padding: 12px 15px; text-align: center;">{{card.bank}}</td>
+                    <td style="padding: 12px 15px; text-align: center;">₹{{card.credit}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
+
+
