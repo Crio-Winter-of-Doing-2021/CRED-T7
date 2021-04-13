@@ -32,7 +32,8 @@ module.exports = {
         contentBase: path.resolve(__dirname, 'dist'),
         watchContentBase: true,
         historyApiFallback: true,
-        hot: true
+        hot: true,
+        inline:true
     },
 
 }

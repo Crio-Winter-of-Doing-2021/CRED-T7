@@ -11,6 +11,7 @@ export class Header extends Component {
         logout: PropTypes.func.isRequired,
         cards: PropTypes.object
     }
+    
 
     render() {
         const { isAuthenticated, user } = this.props.auth;

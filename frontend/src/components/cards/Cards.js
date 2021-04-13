@@ -16,6 +16,7 @@ export class Cards extends Component {
     }
 
     componentDidMount() {
+        document.title="Your Cards"
         this.props.getCards(this.state.page);
         // console.log(this.state)
         this.props.history.push(`/cards`);
@@ -26,6 +27,10 @@ export class Cards extends Component {
         if (this.state.page !== prevState.page) {
             this.props.getCards(this.state.page);
         }
+    }
+
+    onClick(e,id){
+        this.props.history.push(`/cards/${id}`);
     }
 
     render() {
@@ -75,10 +80,8 @@ export class Cards extends Component {
                                                 {/* <td className="px-5 py-5 sm:p-2 text-center border-b border-gray-200 bg-white text-sm">
                                                         <p>₹ {card.credit}
                                                         </p></td> */}
-                                                <td className="border-b text-center border-gray-200">
-                                                    <Link to={`/cards/${card.id}`} replace>
-                                                        <a className="btn btn-info btn-sm mx-3">View Statement</a>
-                                                    </Link>
+                                                <td className="px-5 py-5 sm:p-2 text-center border-b border-gray-200 bg-white text-sm">
+                                                        <button onClick={(e) => this.onClick(e,card.id)} className="btn btn-info btn-sm mx-3">View Statement</button>
                                                 </td>
                                             </tr>
                                         ))}
