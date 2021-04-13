@@ -63,7 +63,7 @@ python manage.py test
  
 
 ## Database schema
-<img src="https://github.com/Crio-Winter-of-Doing-2021/CRED-T7/blob/1bc2ef7562b86a4e631ee257d27c4b98f4374bf0/db_schema.PNG" alt="DBSCHEMA" align="center">
+<img src="https://github.com/Crio-Winter-of-Doing-2021/CRED-T7/blob/6171f1c9d03c43c429b611fee7da9f6ae2aad92b/db_schema.PNG" alt="DBSCHEMA" align="center">
 
  ## API Endpoints
  Following are the api endpoints for this app.
@@ -119,5 +119,5 @@ python manage.py test
 </table>
 
 ## UI Flow
-<img src="ui_flow.PNG" alt="UIFLOW" align="center">
+<img src="https://github.com/Crio-Winter-of-Doing-2021/CRED-T7/blob/6171f1c9d03c43c429b611fee7da9f6ae2aad92b/ui_flow.PNG" alt="UIFLOW" align="center">
   
