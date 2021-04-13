@@ -26,6 +26,10 @@ export class Form extends Component {
         message: PropTypes.object,
     }
 
+    componentDidMount(){
+        document.title="Add Card"
+    }
+
     onChange = e => this.setState({
         [e.target.name]: [e.target.value]
     });

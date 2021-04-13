@@ -37,6 +37,7 @@ export class Card extends Component {
     }
 
     componentDidMount() {
+        document.title="Your Card"
         if (this.props.match.params.id) {
             // console.log(this.props.match.params.id)
             const id = this.props.match.params.id;

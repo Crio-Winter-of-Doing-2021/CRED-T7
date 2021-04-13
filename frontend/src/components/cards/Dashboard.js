@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Cards from './Cards';
 import Form from './Form';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCards } from '../../actions/cards';
@@ -16,7 +16,16 @@ export class Dashboard extends Component {
     }
 
     componentDidMount() {
+        document.title="Dashboard"
         this.props.getCards(1);
+    }
+
+    addcard = () =>{
+        this.props.history.push('/addcard');
+    }
+
+    viewcard = () =>{
+        this.props.history.push('/cards')
     }
 
     render() {
@@ -24,9 +33,8 @@ export class Dashboard extends Component {
         // console.log(this.props.cards)
         if (this.props.cards.count > 0 && this.props.cards.results.length > 0) {
             ifcards =
-                <Link to="/cards" replace> <button href="" className="btn btn-primary mt-2 transform motion-safe:hover:scale-110">
-                    <p className="card-text text-light">View Cards</p>
-                </button></Link>
+            <button onClick={this.viewcard} className="btn btn-primary mt-6 transform motion-safe:hover:scale-110">
+            <p className="card-text text-light">View Cards</p></button>
         }
         else {
             ifcards =
@@ -55,9 +63,9 @@ export class Dashboard extends Component {
                                 <h5 className="card-title font-semibold">Add a Card</h5>
                                 <p className="card-text">Want to add a Card? Click Below</p>
 
-                                <Link to="/addcard" replace>
-                                    <button className="btn btn-primary mt-6 transform motion-safe:hover:scale-110">
-                                        <p className="card-text text-light">Add Card</p></button></Link>
+                                
+                                    <button onClick={this.addcard} className="btn btn-primary mt-6 transform motion-safe:hover:scale-110">
+                                        <p className="card-text text-light">Add Card</p></button>
                             </div>
                             <div className="min-w-4 w-1/2 min-h-56 px-4 py-4 bg-white mt-6  shadow-lg rounded-xl dark:bg-gray-800">
                                 <h5 className="card-title font-semibold">View Your Cards</h5>

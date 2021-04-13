@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import cards from "../images/cards.jpg";
 import banks from "../images/banks.jpg";
@@ -9,9 +9,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoins } from '@fortawesome/fontawesome-free-solid'
 
 export class Home extends Component {
+    componentDidMount(){
+        document.title="Home"
+    }
     render() {
         return (
-            <body className="bg-black">
+            <Fragment>
                 <div className="bg-black min-h-screen">
                     <div className="container bg-black mx-auto">
                         <div className="pl-6 md:px-12 relative z-10 flex items-center">
@@ -28,7 +31,7 @@ export class Home extends Component {
                                     <div className="flex mt-8">
                                         <Link to="/dashboard" replace className="block bg-white hover:bg-gray-100 py-3 px-4 rounded-lg text-lg text-gray-800 font-bold uppercase mt-10">
                                             Discover
-                </Link>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -118,47 +121,47 @@ export class Home extends Component {
                                 <div className="">
                                     <p className="text-md mt-4 font-medium text-gray-400 w-1/2 mb-3">
                                         Another reason to pay those pending bills on time. Coins for you on timely payments.
-                                        <div className="float-right py-5 w-1/3 h-auto text-8xl">
+                                        </p>
+                                        <p className="float-right py-5 w-1/3 h-auto text-8xl">
                                             <FontAwesomeIcon icon={faCoins} color="yellow" />
-                                        </div>
-                                    </p>
+                                        </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-100">
-                    <div class="max-w-6xl m-auto text-gray-800 flex flex-wrap justify-center">
-                        <div class="p-5 w-48 ">
-                            <div class="text-xs uppercase text-gray-500 font-medium">Home</div>
-                            <Link class="my-3 block" to="/">Homepage <span class="text-teal-600 text-xs p-1"></span></Link>
-                            <Link class="my-3 block" to="/dashboard">Dashboard <span class="text-teal-600 text-xs p-1"></span></Link>
-                            <Link class="my-3 block" to="/addcard">Add a Card<span class="text-teal-600 text-xs p-1"></span></Link>
-                            <Link class="my-3 block" to="/cards">View Cards<span class="text-teal-600 text-xs p-1"></span></Link>
+                <div className="bg-gray-100">
+                    <div className="max-w-6xl m-auto text-gray-800 flex flex-wrap justify-center">
+                        <div className="p-5 w-48 ">
+                            <div className="text-xs uppercase text-gray-500 font-medium">Home</div>
+                            <Link className="my-3 block" to="/">Homepage <span className="text-teal-600 text-xs p-1"></span></Link>
+                            <Link className="my-3 block" to="/dashboard">Dashboard <span className="text-teal-600 text-xs p-1"></span></Link>
+                            <Link className="my-3 block" to="/addcard">Add a Card<span className="text-teal-600 text-xs p-1"></span></Link>
+                            <Link className="my-3 block" to="/cards">View Cards<span className="text-teal-600 text-xs p-1"></span></Link>
                         </div>
-                        <div class="p-5 w-48 ">
-                            <div class="text-xs uppercase text-gray-500 font-medium">Project</div>
-                            <a class="my-3 block" href="//www.github.com/Crio-Winter-of-Doing-2021/CRED-T7">Repository to Project <span class="text-teal-600 text-xs p-1"></span></a>
-                            <a class="my-3 block" href="/swagger">Swagger Docs <span class="text-teal-600 text-xs p-1"></span></a>
+                        <div className="p-5 w-48 ">
+                            <div className="text-xs uppercase text-gray-500 font-medium">Project</div>
+                            <a className="my-3 block" href="//www.github.com/Crio-Winter-of-Doing-2021/CRED-T7">Repository to Project <span className="text-teal-600 text-xs p-1"></span></a>
+                            <a className="my-3 block" href="/swagger">Swagger Docs <span className="text-teal-600 text-xs p-1"></span></a>
                         </div>
-                        <div class="p-5 w-48 ">
-                            <div class="text-xs uppercase text-gray-500 font-medium">About us</div>
-                            <p class="my-3 block font-medium">Cred T-7</p>
+                        <div className="p-5 w-48 ">
+                            <div className="text-xs uppercase text-gray-500 font-medium">About us</div>
+                            <p className="my-3 block font-medium">Cred T-7</p>
                             <ul>
-                                <li><p class="my-3 block">Aditya Mahajan (aditya.m.1997@gmail.com)</p></li>
-                                <li><p class="my-3 block">Shantanu Singh (shantanusingh1069@gmail.com)</p></li>
+                                <li><p className="my-3 block">Aditya Mahajan (aditya.m.1997@gmail.com)</p></li>
+                                <li><p className="my-3 block">Shantanu Singh (shantanusingh1069@gmail.com)</p></li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-gray-100 pt-2 ">
-                    <div class="flex pb-5 px-3 m-auto pt-1 border-t text-gray-800 text-sm flex-col
-      md:flex-row max-w-6xl">
-                        <div class="mt-2">© Copyright 2021. All Rights Reserved.</div>
+                <div className="bg-gray-100 pt-2 ">
+                    <div className="flex pb-5 px-3 m-auto pt-1 border-t text-gray-800 text-sm flex-col
+                    md:flex-row max-w-6xl">
+                        <div className="mt-2">© Copyright 2021. All Rights Reserved.</div>
                     </div>
                 </div>
-            </body>
+            </Fragment>
         )
     }
 }
