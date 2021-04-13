@@ -27,8 +27,9 @@ Built a <a href="https://cred.club/">CRED</a> app Clone with the following featu
 <li>View Card Statements :receipt:</li> 
 <li>Smart Statements containing insights about different categorical features and top 10 vendors for a card :chart:</li>  
 <li>Pay bill :heavy_dollar_sign:</li> 
-<li>Send reminders for payments :envelope_with_arrow:</li> 
-<li>Get rewards in form of coins for timely payments :moneybag: </li> 
+<li>Get rewards in form of coins for timely payments :moneybag:</li> 
+<li><p> Send reminders for payments :envelope_with_arrow:</p>
+    <img src="https://github.com/Crio-Winter-of-Doing-2021/CRED-T7/blob/131bec0d0c60da561b049d9d9626c7e9e78276de/reminder.jpg" width=600 height=600></li> 
 </ol>
 
 ## Getting started 
