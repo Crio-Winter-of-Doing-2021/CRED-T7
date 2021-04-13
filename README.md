@@ -63,23 +63,61 @@ python manage.py test
  
 
 ## Database schema
-<img src="https://github.com/Crio-Winter-of-Doing-2021/CRED-T7/blob/1bc2ef7562b86a4e631ee257d27c4b98f4374bf0/db_schema.PNG" alt="DBSCHEMA" align="center">
+<img src="https://github.com/Crio-Winter-of-Doing-2021/CRED-T7/blob/6171f1c9d03c43c429b611fee7da9f6ae2aad92b/db_schema.PNG" alt="DBSCHEMA" align="center">
 
  ## API Endpoints
  Following are the api endpoints for this app.
  
- ```
- /login 
- /signup
- /cards
- /cards/1
- /cards/1/pay
- /cards/1/statements
- /cards/1/statements/04/2021
- /cards/1/smartstatements
- ```
 
+<table style="width:100%">
+  <tr>
+    <th>Name</th>
+    <th>URL</th>
+    <th>Description</th>
+  </tr>
+ <tr>
+    <td>SIGNUP</td>
+    <td>/signup</td>
+    <td>Signing up using username, password, email</td>
+  </tr>
+  <tr>
+    <td>LOGIN</td>
+    <td>/login </td>
+    <td>Logging in using username, password</td>
+  </tr>
+ <tr>
+    <td>CARDS</td>
+    <td>/cards</td>
+    <td>Adding cards</td>
+  </tr>
+   <tr>
+    <td>VIEW CARDS</td>
+    <td>/cards/pk</td>
+    <td>About card</td>
+  </tr>
+    <tr>
+    <td>VIEW STATEMENTS</td>
+    <td>/cards/pk/statements</td>
+    <td>To view transactions for a particular</td>
+  </tr>
+ </tr>
+    <tr>
+    <td>VIEW STATEMENTS FOR MM/YYYY</td>
+    <td>/cards/pk/statements/mm/yyyy</td>
+    <td>To view/post transactions for a MM/YYYY</td>
+  </tr>
+    <tr>
+    <td>PAY BILL</td>
+    <td>/cards/pk/pay</td>
+    <td>To pay bill for a particular card</td>
+  </tr>
+    <tr>
+    <td>SMART STATEMENTS </td>
+    <td>/cards/pk/smartstatements</td>
+    <td>To view top 10 vendors for a particular card</td>
+  </tr>
+</table>
 
 ## UI Flow
-<img src="ui_flow.PNG" alt="UIFLOW" align="center">
+<img src="https://github.com/Crio-Winter-of-Doing-2021/CRED-T7/blob/6171f1c9d03c43c429b611fee7da9f6ae2aad92b/ui_flow.PNG" alt="UIFLOW" align="center">
   
