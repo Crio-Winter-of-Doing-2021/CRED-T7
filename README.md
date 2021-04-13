@@ -108,7 +108,7 @@ python manage.py test
   </tr>
     <tr>
     <td>PAY BILL</td>
-    <td>cards/pk/pay</td>
+    <td>/cards/pk/pay</td>
     <td>To pay bill for a particular card</td>
   </tr>
     <tr>
