@@ -27,8 +27,8 @@ Built a <a href="https://cred.club/">CRED</a> app Clone with the following featu
 <li>View Card Statements :receipt:</li> 
 <li>Smart Statements containing insights about different categorical features and top 10 vendors for a card :chart:</li>  
 <li>Pay bill :heavy_dollar_sign:</li> 
+<li>Get rewards in form of coins for timely payments :moneybag:</li> 
 <li>Send reminders for payments :envelope_with_arrow:</li> 
-<li>Get rewards in form of coins for timely payments :moneybag: </li> 
 </ol>
 
 ## Getting started 
@@ -115,6 +115,12 @@ python manage.py test
     <td>SMART STATEMENTS </td>
     <td>/cards/pk/smartstatements</td>
     <td>To view top 10 vendors for a particular card</td>
+  </tr>
+    </tr>
+    <tr>
+    <td>SWAGGER </td>
+    <td>/swagger</td>
+    <td>Swagger doc for our apis </td>
   </tr>
 </table>
 
