@@ -187,13 +187,23 @@ export class Card extends Component {
                 </div>
             </form>
             if (this.props.card.credit > 0.00) {
-                pay_button = <form onSubmit={this.onSubmit} className="shadow-lg rounded-xl bg-blue-900 md:w-64 p-6 dark:bg-gray-800 relative overflow-hiddencontainer w-auto" >
+                pay_button = <div>
+                <button type="button" className="bg-gray-900 hover:bg-gray-700 
+                text-white font-bold py-3 px-4 rounded inline-flex items-center" data-toggle="modal" data-target="#exampleModalCenter">
+                    Pay Bill
+                </button>
+
+        <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content rounded-xl bg-black">
+            <div className="modal-body p-0 m-0">
+            <form onSubmit={this.onSubmit} className="shadow-lg text-center rounded-xl flex-col justify-center bg-black md:w-64 p-6 dark:bg-gray-800 relative overflow-hiddencontainer w-auto" >
                     <p className="text-white text-2xl font-semibold">
                         Pay Now!
                     </p>
-                    <div className="row py-3">
+                    <div className="row flex justify-center py-3">
                         <div>
-                            <div className="mt-1 relative rounded-md shadow-sm">
+                            <div className="mt-1 relative rounded-md shadow-sm flex justify-center py-3">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <span className="text-black sm:text-sm">
                                         ₹
@@ -205,12 +215,18 @@ export class Card extends Component {
                         </div>
                     </div>
                     <div className="d-flex justify-content-center">
-                        <button type="submit" className="py-2 px-4  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                        <button type="submit" className="bg-red-500 hover:bg-red-700 text-white 
+                        font-bold py-2 px-4 border-b-4 border-red-700
+                         hover:border-red-500 rounded ">
                             PAY
                             </button>
                     </div>
                 </form>
-
+            </div>
+            </div>
+        </div>
+        </div>
+                </div>
             }
             else {
                 pay_button = <button type="button" title="No cards added yet." disabled=" " className="btn bg-green-600 cursor-not-allowed">
