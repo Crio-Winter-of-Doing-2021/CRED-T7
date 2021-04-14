@@ -116,6 +116,12 @@ python manage.py test
     <td>/cards/pk/smartstatements</td>
     <td>To view top 10 vendors for a particular card</td>
   </tr>
+    </tr>
+    <tr>
+    <td>SWAGGER </td>
+    <td>/swagger</td>
+    <td>Swagger doc for our apis </td>
+  </tr>
 </table>
 
 ## UI Flow
