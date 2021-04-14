@@ -25,7 +25,7 @@ Built a <a href="https://cred.club/">CRED</a> app Clone with the following featu
 <li>Login/Register :heavy_check_mark:</li> 
 <li>Adding Cards :credit_card:</li> 
 <li>View Card Statements :receipt:</li> 
-<li>Smart Statements containing insights about different categorical features and top 10 vendors for a card :chart:</li>  
+<li>Smart Statements containing insights about top 10 vendors for a card :chart:</li>  
 <li>Pay bill :heavy_dollar_sign:</li> 
 <li>Send reminders for payments :envelope_with_arrow:</li> 
 <li>Get rewards in form of coins for timely payments :moneybag: </li> 
@@ -119,5 +119,5 @@ python manage.py test
 </table>
 
 ## UI Flow
-<img src="https://github.com/Crio-Winter-of-Doing-2021/CRED-T7/blob/6171f1c9d03c43c429b611fee7da9f6ae2aad92b/ui_flow.PNG" alt="UIFLOW" align="center">
+<img src="https://github.com/Crio-Winter-of-Doing-2021/CRED-T7/blob/6e96b9f1c5318e1b5692af27a64372ec9be54652/ui_flow.PNG" alt="UIFLOW" align="center">
   
